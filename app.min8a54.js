@@ -309,62 +309,39 @@ events.projectColorReset = function () {
 };
 events.goPrevious = function () {
     var a = $("#project-slides > div").length;
-    if (0 < indexProject) indexProject--, indexProject == a - 2 && ($("#project-info-counter span.next").stop(!0, !1).animate({
+
+    // move backward, wrap around
+    indexProject = (indexProject - 1 + a) % a;
+
+    $("#project-info-counter span.next").stop(true, false).animate({
         width: 0
     }, {
-        duration: 1200,
+        duration: 300,
         easing: customEasing
-    }), $("#project").removeClass("next")), events.setProject();
-    else {
-        a = $("#project").data("id");
-        for (var c = 0, d = 0, e = projects.length; d < e; d++)
-            if (projects[d][0] === a) {
-                c = 0 < d ? d - 1 : projects.length - 1;
-                break
-            } a = projects[c][4];
-        history.pushState({
-            url: a
-        }, sitename + " " + a, a);
-        view.load(!1, !1)
-    }
+    });
+    $("#project").removeClass("next");
+
+    events.setProject();
 };
+
 events.goNext = function () {
     var a = $("#project-slides > div").length;
-    if (indexProject < a - 1) {
-        indexProject++;
-        if (indexProject == a - 1) {
-            var c = 5;
-            $("#project-info-counter span.next").children().each(function () {
-                c += $(this).outerWidth()
-            });
-            $("#project-info-counter span.next").stop(!0, !1).animate({
-                width: c
-            }, {
-                duration: 1200,
-                easing: customEasing
-            });
-            $("#project").addClass("next")
-        }
-        events.setProject()
-    } else {
-        $("#project-info-counter span.next").is(":visible") && $("#project-info-counter span.next").stop(!0, !1).animate({
-            width: 0
-        }, {
-            duration: 1200,
-            easing: customEasing
-        });
-        a = $("#project").data("id");
-        for (var d = 0, e = 0, f = projects.length; e < f; e++)
-            if (projects[e][0] === a) {
-                d = e < projects.length - 1 ? e + 1 : 0;
-                break
-            } a = projects[d][4];
-        history.pushState({
-            url: a
-        }, sitename + " " + a, a);
-        view.load(!1, !1)
-    }
+
+    // move forward, wrap around
+    indexProject = (indexProject + 1) % a;
+
+    // optional: remove any "next project" UI if present
+    $("#project-info-counter span.next").stop(true, false).animate({
+        width: 0
+    }, {
+        duration: 300,
+        easing: customEasing
+    });
+    $("#project").removeClass("next");
+
+    events.setProject();
 };
+
 events.projectScroll = function () {
     $("#project-slides").scroll(function (a) {
         a = $(this);
