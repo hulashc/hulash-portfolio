@@ -154,17 +154,6 @@ img {
   margin: 0;
   display: block; }
 
-/* subtle fade-in + lift for project thumbnails on the main index */
-body.projects main section nav a img {
-  transition: transform 320ms ease, opacity 320ms ease;
-  transform: translateY(0);
-  opacity: 0.95;
-}
-body.projects main section nav a:hover img {
-  transform: translateY(-8px);
-  opacity: 1;
-}
-
 img,
 video {
   -moz-user-select: -moz- none;
