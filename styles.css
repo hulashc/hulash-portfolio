@@ -619,3 +619,22 @@ body.force-black {
     transform: scale(0.75); }
   body.info main section {
     padding: 160px calc( ( ( ( 100% - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 5 ) + ( ( 5 - 1 ) * 24px ) + 48px ) 160px calc( ( ( ( 100% - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 1 ) + ( ( 1 - 1 ) * 24px ) + 48px ); } }
+
+/* Make project images clickable without changing size or position */
+#project-slides .project-link {
+  display: contents;
+}
+
+#project-slides .project-link img {
+  display: block;
+}
+
+/* Fallback if display:contents has browser issues */
+@supports not (display: contents) {
+  #project-slides .project-link {
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+  }
+}
+
