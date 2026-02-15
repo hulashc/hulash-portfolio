@@ -638,3 +638,140 @@ body.force-black {
   }
 }
 
+/* Pure CSS Chrome Tabs - Info Page */
+body.info .tabs-section {
+  padding: 120px 16px 32px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+body.info .tabs-section p {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+body.info .subtitle {
+  font-size: 16px;
+  font-weight: normal;
+  opacity: 0.7;
+  display: block;
+  margin-top: 8px;
+}
+
+body.info .tab-container {
+  position: relative;
+}
+
+body.info .tab-input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+body.info .tab-nav {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body.info .tab-nav::-webkit-scrollbar { display: none; }
+
+body.info .tab-btn {
+  background: none;
+  border: none;
+  padding: 12px 24px 12px 20px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  opacity: 0.6;
+  transition: opacity 0.25s cubic-bezier(0.25,0.25,0.75,0.75);
+  margin-right: 8px;
+}
+
+body.info .tab-btn:hover { opacity: 0.8; }
+
+body.info .tab-input:checked + .tab-nav .tab-btn,
+body.info #tab-summary:checked ~ .tab-nav .tab-btn:nth-of-type(1),
+body.info #tab-skills:checked ~ .tab-nav .tab-btn:nth-of-type(2),
+body.info #tab-experience:checked ~ .tab-nav .tab-btn:nth-of-type(3),
+body.info #tab-certs:checked ~ .tab-nav .tab-btn:nth-of-type(4),
+body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5) {
+  opacity: 1;
+  font-weight: 500;
+}
+
+body.info .tab-input:checked + .tab-nav .tab-btn::after,
+body.info #tab-summary:checked ~ .tab-nav .tab-btn:nth-of-type(1)::after,
+body.info #tab-skills:checked ~ .tab-nav .tab-btn:nth-of-type(2)::after,
+body.info #tab-experience:checked ~ .tab-nav .tab-btn:nth-of-type(3)::after,
+body.info #tab-certs:checked ~ .tab-nav .tab-btn:nth-of-type(4)::after,
+body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5)::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20px;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px 1px 0 0;
+}
+
+body.info .tab-content {
+  min-height: 200px;
+}
+
+body.info .tab-pane {
+  display: none;
+}
+
+body.info #tab-summary:checked ~ .tab-content #content-summary,
+body.info #tab-skills:checked ~ .tab-content #content-skills,
+body.info #tab-experience:checked ~ .tab-content #content-experience,
+body.info #tab-certs:checked ~ .tab-content #content-certs,
+body.info #tab-contact:checked ~ .tab-content #content-contact {
+  display: block;
+  animation: tabSlideIn 0.3s cubic-bezier(0.25,0.25,0.75,0.75);
+}
+
+@keyframes tabSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive & Dark mode */
+@media (min-width: 760px) {
+  body.info .tabs-section p { font-size: 28px; }
+  body.info .tab-btn { font-size: 18px; }
+}
+
+@media (min-width: 1020px) {
+  body.info .tabs-section { padding: 160px 24px 48px; }
+}
+
+body.dark .tab-nav { border-bottom-color: rgba(255,255,255,0.1); }
+body.dark .tab-pane ul li { border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+
+body.info .tab-nav {
+  justify-content: space-evenly !important;
+  gap: 0 !important;
+}
+
+body.info .tab-btn {
+  flex: 1 !important;
+  max-width: 120px !important;
+  margin: 0 !important;
+}
+

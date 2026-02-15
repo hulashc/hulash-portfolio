@@ -53,6 +53,8 @@
 </head>
 
 <body class="info init">
+	<div class="neon-lights" aria-hidden="true"></div>
+
 
 	<header>
 
@@ -89,37 +91,77 @@
 	</header>
 
 	<main>
-		<section>
+		<section class="tabs-section">
+			<p>Data Engineer | AWS Certified | FinTech Specialist<br></p>
 
+			<div class="tab-container">
+				<input type="radio" name="tabs" id="tab-summary" class="tab-input" checked>
+				<input type="radio" name="tabs" id="tab-skills" class="tab-input">
+				<input type="radio" name="tabs" id="tab-experience" class="tab-input">
+				<input type="radio" name="tabs" id="tab-certs" class="tab-input">
+				<input type="radio" name="tabs" id="tab-contact" class="tab-input">
 
-			<p>
-				HULASH is a data engineer specializing in cloud-based data pipelines, scalable systems, and
-				analytics-ready architectures.</p>
+				<div class="tab-nav">
+					<label for="tab-summary" class="tab-btn">Summary</label>
+					<label for="tab-skills" class="tab-btn">Skills</label>
+					<label for="tab-experience" class="tab-btn">Experience</label>
+					<label for="tab-certs" class="tab-btn">Certifications</label>
+					<label for="tab-contact" class="tab-btn">Contact</label>
+				</div>
 
-			<ul>
+				<div class="tab-content">
+					<div class="tab-pane" id="content-summary">
+						<p>Data Engineer wielding AWS like Darth Vader's lightsaber, slicing 100M+ transactions/mo. Van
+							Gogh with Kafka & Spark, painting compliant pipelines from Leicester. MSc FinTech survivor,
+							Innowise pipeline jedi, Next.js ninja building healthcare apps. Chess grandmaster debugging
+							cloud bills, TechEdge founder mentoring ADPList padawans, quant trader turning NASDAQ chaos
+							into starry night profits. "I am your data lineage. Join the dark side—we have better ETL."
+						</p>
+					</div>
 
+					<div class="tab-pane" id="content-skills">
+						<ul>
+							<li><strong>Cloud:</strong> AWS (Kinesis/S3/EMR/Redshift/Glue/Lambda), Azure Synapse, GCP
+								BigQuery, Terraform</li>
+							<li><strong>ETL/Streaming:</strong> Spark, Kafka, Airflow, Databricks, Snowflake, Flink</li>
+							<li><strong>Languages:</strong> Python, SQL, Scala, Java, R, Bash</li>
+							<li><strong>DBs:</strong> PostgreSQL, Oracle, DynamoDB, MongoDB, Redis</li>
+							<li><strong>DevOps:</strong> Docker, Kubernetes, Jenkins, GitOps</li>
+						</ul>
+					</div>
 
-				<li class="label">Clients & Experience</li>
+					<div class="tab-pane" id="content-experience">
+						<ul>
+							<li><strong>Innowise Solutions (2024–Present)</strong><br>Data Engineer/AWS Consultant:
+								Real-time pipelines (Kafka/Spark/Kinesis), 35% cost optimization, mentoring juniors.
+							</li>
+							<li><strong>Deloitte USI (2020–2021)</strong><br>Automation Analyst: Automated tax reporting
+								for 30 entities, 40% faster closes, Power BI dashboards.</li>
+						</ul>
+					</div>
 
+					<div class="tab-pane" id="content-certs">
+						<ul>
+							<li>AWS Certified Data Engineer – Associate (2024)</li>
+							<li>AWS Developer Associate (2023)</li>
+							<li>AWS Cloud Practitioner (2023)</li>
+							<li>Tableau Certified Data Analyst (2023)</li>
+							<li>MongoDB Certified Developer (2023)</li>
+						</ul>
+					</div>
 
-				<li><a href="https://4ad.com/" target="_blank">4AD</a></li>
-				<li><a href="https://www.abramsbooks.com/" target="_blank">Abrams</a></li>
-				<li>Apple</li>
-			</ul>
-
-
-
-			<p>
-				<a href="mailto:benjamintousley@gmail.com">Contact</a>.
-
-				<a href="https://www.instagram.com/wilkerton/">Instagram.</a>
-
-				Site by <a href="https://frederikdelmotte.com/" target="_blank" rel="noopener">Frederik Delmotte.</a>
-			</p>
-
-
+					<div class="tab-pane" id="content-contact">
+						<p><strong>Email:</strong> hulashc@gmail.com<br>
+							<strong>LinkedIn:</strong> <a
+								href="https://linkedin.com/in/hulash">linkedin.com/in/hulash</a><br>
+							<strong>Mobile:</strong> +44 7584 792309<br>
+							<strong>Location:</strong> Leicester, UK</p>
+					</div>
+				</div>
+			</div>
 		</section>
 	</main>
+
 	<footer>
 	</footer>
 	</script>
