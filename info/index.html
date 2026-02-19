@@ -14,6 +14,7 @@
 	<meta property="og:url" content="https://www.hulash.com/info/" />
 	<meta property="og:title" content="Info – Hulash Chand Donempudi" />
 	<meta property="og:description" content="Hulash Chand Donempudi – Data Engineer specialising in cloud-based data pipelines, scalable systems, and analytics-ready architectures." />
+	<meta property="og:image" content="https://www.hulash.com/content/uploads/profile-photo.jpg" />
 
 	<link rel='stylesheet' id='TEMPLATE-css' href='../styles.css' type='text/css' media='all' />
 	<script type="text/javascript" src="../jquery-3.6.0.mind4d0.js" id="jquery-3.6.0.min-js"></script>
@@ -41,6 +42,33 @@
 		document.querySelector(':root').style.setProperty('--background', '#cccccc');
 		document.querySelector(':root').style.setProperty('--mono', '#cccccc');
 	</script>
+
+	<style>
+		.profile-photo {
+			width: 180px;
+			height: 180px;
+			border-radius: 50%;
+			object-fit: cover;
+			display: block;
+			margin: 0 auto 24px;
+			border: 3px solid var(--mono);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		}
+		.cv-download {
+			display: inline-block;
+			margin-top: 16px;
+			padding: 10px 20px;
+			background: var(--mono);
+			color: var(--background);
+			border-radius: 6px;
+			text-decoration: none;
+			font-weight: 500;
+			transition: opacity 0.2s;
+		}
+		.cv-download:hover {
+			opacity: 0.85;
+		}
+	</style>
 
 </head>
 
@@ -75,6 +103,7 @@
 
 	<main>
 		<section class="tabs-section">
+			<img src="../content/uploads/profile-photo.jpg" alt="Hulash Chand Donempudi profile photo" class="profile-photo">
 			<p>Data Engineer &nbsp;|&nbsp; AWS Certified &nbsp;|&nbsp; FinTech Specialist</p>
 
 			<div class="tab-container">
@@ -142,6 +171,9 @@
 							<strong>GitHub:</strong> <a href="https://github.com/hulashc" target="_blank" rel="noopener">github.com/hulashc</a><br>
 							<strong>Location:</strong> Leicester, UK
 						</p>
+						<a href="https://drive.google.com/file/d/1e_w0NjbBXYsOOdYx5ZJ3JSrUvufieSmP/view?usp=drive_link" class="cv-download" target="_blank" rel="noopener">
+							📎 Download CV / Resume (PDF)
+						</a>
 					</div>
 				</div>
 			</div>
