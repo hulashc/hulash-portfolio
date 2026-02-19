@@ -241,27 +241,22 @@
 			}
 		];
 
-		// ── Tuning knobs ─────────────────────────────────────────────────
-		const SCALE       = 260;   // constellation bounding box px (was 160)
-		const GAP         = 320;   // px gap between constellations
-		const SCROLL_SPEED = 0.22; // px per frame
+		const SCALE        = 260;
+		const GAP          = 320;
+		const SCROLL_SPEED = 0.8;  // ← was 0.22, now ~4x faster
 
-		// Star rendering
-		const STAR_BASE_R  = 1.6;  // minimum core radius px (was 0.8)
-		const STAR_MAG_R   = 2.8;  // added radius per unit magnitude (was 1.4)
-		const GLOW_MULT    = 6.0;  // glow halo = radius * this (was 3.5)
-		const ALPHA_BASE   = 0.18; // base opacity (was 0.10)
-		const ALPHA_MAG    = 0.38; // extra opacity per magnitude unit (was 0.18)
+		const STAR_BASE_R  = 1.6;
+		const STAR_MAG_R   = 2.8;
+		const GLOW_MULT    = 6.0;
+		const ALPHA_BASE   = 0.18;
+		const ALPHA_MAG    = 0.38;
 
-		// Sparkle
-		const SPARKLE_AMP  = 0.55; // how much brightness swings (0=none, 1=full) (was 0.3)
-		const SPARKLE_SIZE = 0.30; // how much radius swings (was 0.15)
-		const SPARKLE_FAST = 0.055;// max sparkle speed (was 0.03)
+		const SPARKLE_AMP  = 0.55;
+		const SPARKLE_SIZE = 0.30;
+		const SPARKLE_FAST = 0.12; // ← was 0.055, now ~2x faster twinkle
 
-		// Lines
-		const LINE_ALPHA   = 0.13; // line opacity (was 0.07)
-		const LINE_WIDTH   = 1.0;  // line width px (was 0.7)
-		// ─────────────────────────────────────────────────────────────────
+		const LINE_ALPHA   = 0.13;
+		const LINE_WIDTH   = 1.0;
 
 		const STRIP_W = ZODIACS.length * (SCALE + GAP);
 
@@ -271,7 +266,7 @@
 			yBand:   0.15 + (i % 4) * 0.20,
 			sparkle: z.stars.map(() => ({
 				t:     Math.random() * Math.PI * 2,
-				speed: 0.018 + Math.random() * SPARKLE_FAST
+				speed: 0.04 + Math.random() * SPARKLE_FAST
 			}))
 		}));
 
@@ -291,7 +286,6 @@
 		}
 
 		function drawStar(x, y, radius, alpha, color) {
-			// Wide soft outer halo
 			const halo = radius * GLOW_MULT;
 			const grd  = ctx.createRadialGradient(x, y, 0, x, y, halo);
 			grd.addColorStop(0,    hexAlpha(color, alpha));
@@ -302,8 +296,6 @@
 			ctx.arc(x, y, halo, 0, Math.PI * 2);
 			ctx.fillStyle = grd;
 			ctx.fill();
-
-			// Crisp bright core
 			ctx.beginPath();
 			ctx.arc(x, y, radius, 0, Math.PI * 2);
 			ctx.fillStyle = hexAlpha(color, Math.min(alpha * 1.8, 1));
@@ -315,7 +307,6 @@
 		function tick() {
 			ctx.clearRect(0, 0, W, H);
 			scrollX = (scrollX + SCROLL_SPEED) % STRIP_W;
-
 			const color = getColor();
 
 			instances.forEach(inst => {
@@ -333,7 +324,6 @@
 						y: yCenter + (ny - 0.5) * SCALE
 					}));
 
-					// Lines
 					z.lines.forEach(([a, b]) => {
 						ctx.beginPath();
 						ctx.moveTo(pos[a].x, pos[a].y);
@@ -343,11 +333,10 @@
 						ctx.stroke();
 					});
 
-					// Stars
 					z.stars.forEach((_, si) => {
 						const mag = z.mag[si];
 						const sp  = inst.sparkle[si];
-						const sf  = 0.5 + 0.5 * Math.sin(sp.t); // 0-1
+						const sf  = 0.5 + 0.5 * Math.sin(sp.t);
 						const alpha  = (ALPHA_BASE + mag * ALPHA_MAG) * (1 - SPARKLE_AMP + SPARKLE_AMP * sf);
 						const radius = (STAR_BASE_R + mag * STAR_MAG_R) * (1 - SPARKLE_SIZE + SPARKLE_SIZE * sf);
 						drawStar(pos[si].x, pos[si].y, radius, alpha, color);
