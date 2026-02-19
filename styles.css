@@ -707,7 +707,8 @@ body.info #tab-summary:checked ~ .tab-nav .tab-btn:nth-of-type(1),
 body.info #tab-skills:checked ~ .tab-nav .tab-btn:nth-of-type(2),
 body.info #tab-experience:checked ~ .tab-nav .tab-btn:nth-of-type(3),
 body.info #tab-certs:checked ~ .tab-nav .tab-btn:nth-of-type(4),
-body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5) {
+body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5),
+body.info #tab-graph:checked ~ .tab-nav .tab-btn:nth-of-type(6) {
   opacity: 1;
   font-weight: 500;
 }
@@ -717,7 +718,8 @@ body.info #tab-summary:checked ~ .tab-nav .tab-btn:nth-of-type(1)::after,
 body.info #tab-skills:checked ~ .tab-nav .tab-btn:nth-of-type(2)::after,
 body.info #tab-experience:checked ~ .tab-nav .tab-btn:nth-of-type(3)::after,
 body.info #tab-certs:checked ~ .tab-nav .tab-btn:nth-of-type(4)::after,
-body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5)::after {
+body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5)::after,
+body.info #tab-graph:checked ~ .tab-nav .tab-btn:nth-of-type(6)::after {
   content: '';
   position: absolute;
   bottom: -1px;
@@ -740,7 +742,8 @@ body.info #tab-summary:checked ~ .tab-content #content-summary,
 body.info #tab-skills:checked ~ .tab-content #content-skills,
 body.info #tab-experience:checked ~ .tab-content #content-experience,
 body.info #tab-certs:checked ~ .tab-content #content-certs,
-body.info #tab-contact:checked ~ .tab-content #content-contact {
+body.info #tab-contact:checked ~ .tab-content #content-contact,
+body.info #tab-graph:checked ~ .tab-content #content-graph {
   display: block;
   animation: tabSlideIn 0.3s cubic-bezier(0.25,0.25,0.75,0.75);
 }
@@ -774,4 +777,3 @@ body.info .tab-btn {
   max-width: 120px !important;
   margin: 0 !important;
 }
-
