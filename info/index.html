@@ -68,6 +68,76 @@
 		.cv-download:hover {
 			opacity: 0.85;
 		}
+
+		/* ── Graph tab ── */
+		#content-graph {
+			padding: 0;
+		}
+		#graph-wrapper {
+			position: relative;
+			width: 100%;
+			height: 480px;
+			background: #0d0d0d;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+		#graph-svg {
+			width: 100%;
+			height: 100%;
+		}
+		/* node labels */
+		.g-label {
+			font-size: 11px;
+			fill: #e0e0e0;
+			pointer-events: none;
+			font-family: monospace;
+		}
+		/* tooltip */
+		#graph-tooltip {
+			position: absolute;
+			background: rgba(0,0,0,0.82);
+			color: #fff;
+			padding: 6px 10px;
+			border-radius: 5px;
+			font-size: 12px;
+			font-family: monospace;
+			pointer-events: none;
+			opacity: 0;
+			transition: opacity 0.15s;
+			max-width: 200px;
+			z-index: 10;
+		}
+		/* legend */
+		#graph-legend {
+			position: absolute;
+			bottom: 12px;
+			left: 14px;
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+		}
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			font-size: 11px;
+			color: #bbb;
+			font-family: monospace;
+		}
+		.legend-dot {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			flex-shrink: 0;
+		}
+		#graph-hint {
+			position: absolute;
+			top: 10px;
+			right: 12px;
+			font-size: 10px;
+			color: #555;
+			font-family: monospace;
+		}
 	</style>
 
 </head>
@@ -112,6 +182,7 @@
 				<input type="radio" name="tabs" id="tab-experience" class="tab-input">
 				<input type="radio" name="tabs" id="tab-certs" class="tab-input">
 				<input type="radio" name="tabs" id="tab-contact" class="tab-input">
+				<input type="radio" name="tabs" id="tab-graph" class="tab-input">
 
 				<div class="tab-nav">
 					<label for="tab-summary" class="tab-btn">Summary</label>
@@ -119,6 +190,7 @@
 					<label for="tab-experience" class="tab-btn">Experience</label>
 					<label for="tab-certs" class="tab-btn">Certifications</label>
 					<label for="tab-contact" class="tab-btn">Contact</label>
+					<label for="tab-graph" class="tab-btn">Graph</label>
 				</div>
 
 				<div class="tab-content">
@@ -175,6 +247,22 @@
 							&#128206; Download CV / Resume (PDF)
 						</a>
 					</div>
+
+					<!-- ── GRAPH TAB ── -->
+					<div class="tab-pane" id="content-graph">
+						<div id="graph-wrapper">
+							<svg id="graph-svg"></svg>
+							<div id="graph-tooltip"></div>
+							<div id="graph-legend">
+								<div class="legend-item"><span class="legend-dot" style="background:#7c6af7"></span>Me</div>
+								<div class="legend-item"><span class="legend-dot" style="background:#4fc3f7"></span>Project</div>
+								<div class="legend-item"><span class="legend-dot" style="background:#81c784"></span>Skill</div>
+								<div class="legend-item"><span class="legend-dot" style="background:#ffb74d"></span>Tool</div>
+							</div>
+							<div id="graph-hint">drag · scroll to zoom</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</section>
@@ -186,6 +274,191 @@
 
 	<script>
 		document.getElementById('footer-year').textContent = new Date().getFullYear();
+	</script>
+
+	<!-- D3 v7 (CDN) -->
+	<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+	<script>
+	(function () {
+		// ── Graph data ──────────────────────────────────────────────
+		const nodes = [
+			// centre
+			{ id: "Hulash",             group: "me",      url: "/info/" },
+			// projects
+			{ id: "Celestian Labs",     group: "project", url: "/projects/celestian-labs/" },
+			{ id: "System Design",      group: "project", url: "/projects/system-design-architecture/" },
+			{ id: "Bird Song Model",    group: "project", url: "/projects/birdsong-mathematical-model/" },
+			{ id: "Leet Journey",       group: "project", url: "/projects/leetjourney-obsidian-notes/" },
+			// skills
+			{ id: "AWS",                group: "skill",   url: null },
+			{ id: "Python",             group: "skill",   url: null },
+			{ id: "Kafka",              group: "skill",   url: null },
+			{ id: "Spark",              group: "skill",   url: null },
+			{ id: "Next.js",            group: "skill",   url: null },
+			{ id: "SQL",                group: "skill",   url: null },
+			{ id: "Docker",             group: "skill",   url: null },
+			// tools
+			{ id: "Obsidian",           group: "tool",    url: null },
+			{ id: "Airflow",            group: "tool",    url: null },
+			{ id: "Terraform",          group: "tool",    url: null },
+			{ id: "Databricks",         group: "tool",    url: null },
+		];
+
+		const links = [
+			// me → projects
+			{ source: "Hulash",          target: "Celestian Labs" },
+			{ source: "Hulash",          target: "System Design" },
+			{ source: "Hulash",          target: "Bird Song Model" },
+			{ source: "Hulash",          target: "Leet Journey" },
+			// me → skills
+			{ source: "Hulash",          target: "AWS" },
+			{ source: "Hulash",          target: "Python" },
+			{ source: "Hulash",          target: "Next.js" },
+			{ source: "Hulash",          target: "SQL" },
+			// projects → skills
+			{ source: "Celestian Labs",  target: "Python" },
+			{ source: "Celestian Labs",  target: "AWS" },
+			{ source: "System Design",   target: "Kafka" },
+			{ source: "System Design",   target: "Docker" },
+			{ source: "System Design",   target: "AWS" },
+			{ source: "Bird Song Model", target: "Python" },
+			{ source: "Bird Song Model", target: "SQL" },
+			{ source: "Leet Journey",    target: "Python" },
+			{ source: "Leet Journey",    target: "Obsidian" },
+			// skills → tools
+			{ source: "AWS",             target: "Terraform" },
+			{ source: "Kafka",           target: "Spark" },
+			{ source: "Spark",           target: "Databricks" },
+			{ source: "Airflow",         target: "Python" },
+			{ source: "Hulash",          target: "Airflow" },
+		];
+
+		const palette = {
+			me:      "#7c6af7",
+			project: "#4fc3f7",
+			skill:   "#81c784",
+			tool:    "#ffb74d",
+		};
+
+		const radius = { me: 18, project: 13, skill: 9, tool: 8 };
+
+		// ── Init after tab is first activated ──────────────────────
+		let graphInited = false;
+
+		function initGraph () {
+			if (graphInited) return;
+			graphInited = true;
+
+			const wrapper  = document.getElementById('graph-wrapper');
+			const W        = wrapper.clientWidth  || 700;
+			const H        = wrapper.clientHeight || 480;
+			const tooltip  = document.getElementById('graph-tooltip');
+
+			const svg = d3.select('#graph-svg')
+				.attr('viewBox', [0, 0, W, H]);
+
+			// zoom
+			const g = svg.append('g');
+			svg.call(
+				d3.zoom()
+				  .scaleExtent([0.3, 4])
+				  .on('zoom', e => g.attr('transform', e.transform))
+			);
+
+			// simulation
+			const sim = d3.forceSimulation(nodes)
+				.force('link',   d3.forceLink(links).id(d => d.id).distance(90).strength(0.7))
+				.force('charge', d3.forceManyBody().strength(-260))
+				.force('center', d3.forceCenter(W / 2, H / 2))
+				.force('collide', d3.forceCollide(d => radius[d.group] + 14));
+
+			// glow filter
+			const defs   = svg.append('defs');
+			const filter = defs.append('filter').attr('id', 'glow');
+			filter.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'coloredBlur');
+			const feMerge = filter.append('feMerge');
+			feMerge.append('feMergeNode').attr('in', 'coloredBlur');
+			feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+			// links
+			const link = g.append('g')
+				.selectAll('line')
+				.data(links)
+				.join('line')
+				.attr('stroke', '#333')
+				.attr('stroke-width', 1.2)
+				.attr('stroke-opacity', 0.7);
+
+			// nodes
+			const node = g.append('g')
+				.selectAll('circle')
+				.data(nodes)
+				.join('circle')
+				.attr('r',      d => radius[d.group])
+				.attr('fill',   d => palette[d.group])
+				.attr('stroke', '#0d0d0d')
+				.attr('stroke-width', 1.5)
+				.style('filter', 'url(#glow)')
+				.style('cursor', d => d.url ? 'pointer' : 'default')
+				.call(
+					d3.drag()
+					  .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+					  .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+					  .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+				)
+				.on('mouseover', function (e, d) {
+					d3.select(this).attr('r', radius[d.group] + 4);
+					tooltip.style.opacity = '1';
+					tooltip.textContent   = d.url ? `→ ${d.id}` : d.id;
+				})
+				.on('mousemove', function (e) {
+					const rect = wrapper.getBoundingClientRect();
+					tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
+					tooltip.style.top  = (e.clientY - rect.top  - 28) + 'px';
+				})
+				.on('mouseout', function (e, d) {
+					d3.select(this).attr('r', radius[d.group]);
+					tooltip.style.opacity = '0';
+				})
+				.on('click', (e, d) => { if (d.url) window.location.href = d.url; });
+
+			// labels
+			const label = g.append('g')
+				.selectAll('text')
+				.data(nodes)
+				.join('text')
+				.attr('class', 'g-label')
+				.attr('dy', d => -radius[d.group] - 4)
+				.attr('text-anchor', 'middle')
+				.text(d => d.id);
+
+			// tick
+			sim.on('tick', () => {
+				link
+					.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+					.attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+				node
+					.attr('cx', d => d.x)
+					.attr('cy', d => d.y);
+				label
+					.attr('x', d => d.x)
+					.attr('y', d => d.y);
+			});
+		}
+
+		// Watch for graph tab activation
+		document.getElementById('tab-graph').addEventListener('change', function () {
+			if (this.checked) {
+				// small delay so the pane is visible and has dimensions
+				setTimeout(initGraph, 60);
+			}
+		});
+		// Also handle label click (label triggers input change)
+		document.querySelector('label[for="tab-graph"]').addEventListener('click', function () {
+			setTimeout(initGraph, 80);
+		});
+	})();
 	</script>
 
 </body>
