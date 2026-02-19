@@ -44,9 +44,62 @@
 		document.querySelector(':root').style.setProperty('--mono', '#cccccc');
 	</script>
 
+	<style>
+		/* ── Paper plane canvas ── */
+		#plane-canvas {
+			position: fixed;
+			inset: 0;
+			width: 100vw;
+			height: 100vh;
+			pointer-events: none;
+			z-index: 1;
+			overflow: visible;
+		}
+
+		/* ── Trail dots ── */
+		.plane-trail {
+			fill: currentColor;
+			opacity: 0;
+		}
+
+		/* ── Plane group ── */
+		#paper-plane {
+			opacity: 0.28;
+			transform-origin: 12px 10px;
+		}
+	</style>
+
 </head>
 
 <body class="projects init">
+
+	<!-- Paper plane (fixed, pointer-events:none so it never blocks clicks) -->
+	<svg id="plane-canvas" aria-hidden="true">
+		<defs>
+			<!-- Trail gradient -->
+			<linearGradient id="trail-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+				<stop offset="0%"  stop-color="currentColor" stop-opacity="0"/>
+				<stop offset="100%" stop-color="currentColor" stop-opacity="0.18"/>
+			</linearGradient>
+		</defs>
+
+		<!-- Trail path (drawn dynamically) -->
+		<path id="plane-trail-path"
+			stroke="url(#trail-grad)"
+			stroke-width="1"
+			fill="none"
+			stroke-linecap="round"
+			opacity="0.5"
+		/>
+
+		<!-- Paper plane SVG icon -->
+		<g id="paper-plane">
+			<!-- Classic folded paper plane -->
+			<polygon points="0,8 24,0 18,20" fill="currentColor" opacity="0.9"/>
+			<polygon points="0,8 18,20 10,13" fill="currentColor" opacity="0.5"/>
+			<line x1="10" y1="13" x2="18" y2="20" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
+		</g>
+	</svg>
 
 	<header>
 
@@ -138,6 +191,117 @@
 
 	<script>
 		document.getElementById('footer-year').textContent = new Date().getFullYear();
+	</script>
+
+	<script>
+	(function () {
+		const plane     = document.getElementById('paper-plane');
+		const trailPath = document.getElementById('plane-trail-path');
+
+		// ── Bezier flight path ──────────────────────────────────────────
+		// We define a handful of waypoints as cubic bezier segments.
+		// The plane enters from off-screen left, arcs gently across,
+		// exits off-screen right, then instantly resets — seamless loop.
+		function buildPath (W, H) {
+			// Start off-screen left, end off-screen right
+			// Control points create a lazy S-curve across the viewport
+			return [
+				{ x: -40,    y: H * 0.30 },                        // start
+				{ cx1: W * 0.15, cy1: H * 0.10,
+				  cx2: W * 0.35, cy2: H * 0.55,
+				  x:  W * 0.50,  y:  H * 0.38 },                   // mid-left arc
+				{ cx1: W * 0.65, cy1: H * 0.20,
+				  cx2: W * 0.80, cy2: H * 0.60,
+				  x:  W + 40,    y:  H * 0.20 },                   // exit right
+			];
+		}
+
+		// Convert waypoints to SVG path string
+		function waypointsToD (pts) {
+			let d = `M ${pts[0].x} ${pts[0].y}`;
+			for (let i = 1; i < pts.length; i++) {
+				const p = pts[i];
+				d += ` C ${p.cx1} ${p.cy1}, ${p.cx2} ${p.cy2}, ${p.x} ${p.y}`;
+			}
+			return d;
+		}
+
+		// Get x,y + tangent angle at t along a cubic bezier
+		function cubicBezier (p0, p1, t) {
+			const mt = 1 - t;
+			const x = mt*mt*mt*p0.x + 3*mt*mt*t*p1.cx1 + 3*mt*t*t*p1.cx2 + t*t*t*p1.x;
+			const y = mt*mt*mt*p0.y + 3*mt*mt*t*p1.cy1 + 3*mt*t*t*p1.cy2 + t*t*t*p1.y;
+			// derivative for angle
+			const dx = 3*mt*mt*(p1.cx1-p0.x) + 6*mt*t*(p1.cx2-p1.cx1) + 3*t*t*(p1.x-p1.cx2);
+			const dy = 3*mt*mt*(p1.cy1-p0.y) + 6*mt*t*(p1.cy2-p1.cy1) + 3*t*t*(p1.y-p1.cy2);
+			return { x, y, angle: Math.atan2(dy, dx) * 180 / Math.PI };
+		}
+
+		// ── Animation state ─────────────────────────────────────────────
+		const DURATION = 14000; // ms for one full crossing
+		const TRAIL_LEN = 60;   // max trail points kept
+		const trail = [];
+		let startTime = null;
+		let pts, segments;
+
+		function resize () {
+			pts = buildPath(window.innerWidth, window.innerHeight);
+			segments = pts.slice(1); // bezier segments (exclude start point)
+		}
+		resize();
+		window.addEventListener('resize', resize);
+
+		// ── Fade in after short delay ────────────────────────────────────
+		setTimeout(() => {
+			plane.style.transition = 'opacity 1.2s ease';
+			plane.style.opacity    = '0.28';
+		}, 800);
+
+		// ── Main loop ────────────────────────────────────────────────────
+		function tick (ts) {
+			if (!startTime) startTime = ts;
+			const elapsed = (ts - startTime) % DURATION;
+			const progress = elapsed / DURATION; // 0 → 1
+
+			// Map progress across segments (2 segments, each covers 0.5 of progress)
+			const segCount  = segments.length;
+			const segIndex  = Math.min(Math.floor(progress * segCount), segCount - 1);
+			const segT      = (progress * segCount) - segIndex;
+			const p0        = segIndex === 0 ? pts[0] : pts[segIndex];
+			const p1        = segments[segIndex];
+			const pos       = cubicBezier(p0, p1, segT);
+
+			// Move & rotate plane
+			plane.setAttribute('transform',
+				`translate(${pos.x - 12}, ${pos.y - 10}) rotate(${pos.angle}, 12, 10)`
+			);
+
+			// Trail
+			trail.push({ x: pos.x, y: pos.y });
+			if (trail.length > TRAIL_LEN) trail.shift();
+
+			if (trail.length > 1) {
+				let d = `M ${trail[0].x} ${trail[0].y}`;
+				for (let i = 1; i < trail.length; i++) {
+					d += ` L ${trail[i].x} ${trail[i].y}`;
+				}
+				trailPath.setAttribute('d', d);
+			}
+
+			// Reset trail on loop restart
+			if (progress < 0.01 && trail.length > 5) trail.length = 0;
+
+			requestAnimationFrame(tick);
+		}
+
+		// Respect prefers-reduced-motion
+		if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			requestAnimationFrame(tick);
+		} else {
+			// Hide entirely for users who prefer no motion
+			document.getElementById('plane-canvas').style.display = 'none';
+		}
+	})();
 	</script>
 
 </body>
