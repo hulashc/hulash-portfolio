@@ -6,12 +6,12 @@
 	<title>Hulash Chand Donempudi</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Hulash Chand Donempudi – Data Engineer designing scalable data systems across cloud, analytics, and automation. Based in Leicester, UK.">
+	<meta name="description" content="Hulash Chand Donempudi - Data Engineer designing scalable data systems across cloud, analytics, and automation. Based in Leicester, UK.">
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Hulash Chand Donempudi – Data Engineer">
+	<meta property="og:title" content="Hulash Chand Donempudi - Data Engineer">
 	<meta property="og:url" content="https://www.hulash.com/">
-	<meta property="og:description" content="Hulash Chand Donempudi – Data Engineer designing scalable data systems across cloud, analytics, and automation.">
+	<meta property="og:description" content="Hulash Chand Donempudi - Data Engineer designing scalable data systems across cloud, analytics, and automation.">
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://www.hulash.com/content/uploads/2025/celestian-labs-AAI/celestian-labs-0.png">
 
@@ -45,27 +45,14 @@
 	</script>
 
 	<style>
-		/* ── Paper plane canvas ── */
-		#plane-canvas {
+		#leaf-canvas {
 			position: fixed;
 			inset: 0;
 			width: 100vw;
 			height: 100vh;
 			pointer-events: none;
 			z-index: 1;
-			overflow: visible;
-		}
-
-		/* ── Trail dots ── */
-		.plane-trail {
-			fill: currentColor;
-			opacity: 0;
-		}
-
-		/* ── Plane group ── */
-		#paper-plane {
-			opacity: 0.28;
-			transform-origin: 12px 10px;
+			overflow: hidden;
 		}
 	</style>
 
@@ -73,36 +60,9 @@
 
 <body class="projects init">
 
-	<!-- Paper plane (fixed, pointer-events:none so it never blocks clicks) -->
-	<svg id="plane-canvas" aria-hidden="true">
-		<defs>
-			<!-- Trail gradient -->
-			<linearGradient id="trail-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-				<stop offset="0%"  stop-color="currentColor" stop-opacity="0"/>
-				<stop offset="100%" stop-color="currentColor" stop-opacity="0.18"/>
-			</linearGradient>
-		</defs>
-
-		<!-- Trail path (drawn dynamically) -->
-		<path id="plane-trail-path"
-			stroke="url(#trail-grad)"
-			stroke-width="1"
-			fill="none"
-			stroke-linecap="round"
-			opacity="0.5"
-		/>
-
-		<!-- Paper plane SVG icon -->
-		<g id="paper-plane">
-			<!-- Classic folded paper plane -->
-			<polygon points="0,8 24,0 18,20" fill="currentColor" opacity="0.9"/>
-			<polygon points="0,8 18,20 10,13" fill="currentColor" opacity="0.5"/>
-			<line x1="10" y1="13" x2="18" y2="20" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
-		</g>
-	</svg>
+	<canvas id="leaf-canvas" aria-hidden="true"></canvas>
 
 	<header>
-
 		<a href="/">Hulash Chand Donempudi</a>
 
 		<ul class="index js-index">
@@ -112,7 +72,7 @@
 			</li>
 			<li>
 				<a href="#" class="js-sort-alpha">A-Z</a>
-				<a href="#" class="js-sort-date">2026–2024</a>
+				<a href="#" class="js-sort-date">2026-2024</a>
 			</li>
 		</ul>
 
@@ -126,7 +86,6 @@
 		</ul>
 
 		<a href="#" class="color js-theme"></a>
-
 	</header>
 
 	<main>
@@ -134,11 +93,11 @@
 			<nav>
 
 				<a href="/projects/celestian-labs/" data-color="#b3c6f2"
-					data-title="Celestian Labs – Agentic Artificial Intelligence" data-date="20260214">
+					data-title="Celestian Labs - Agentic Artificial Intelligence" data-date="20260214">
 					<img src="content/uploads/2025/celestian-labs-AAI/celestian-labs-0.png"
 						srcset="content/uploads/2025/celestian-labs-AAI/celestian-labs-0.png 640w, content/uploads/2025/celestian-labs-AAI/celestian-labs-0.png 1280w"
 						sizes="(max-width: 1020px) 100vw, 50vw"
-						alt="Celestian Labs – Agentic AI platform">
+						alt="Celestian Labs - Agentic AI platform">
 					<span>
 						<span>Celestian Labs</span>
 						<span>Agentic Artificial Intelligence</span>
@@ -146,11 +105,11 @@
 				</a>
 
 				<a href="/projects/leetjourney-obsidian-notes/" data-color="#e6c7e6"
-					data-title="Leet Journey – Obsidian Notes" data-date="20241121">
+					data-title="Leet Journey - Obsidian Notes" data-date="20241121">
 					<img src="content/uploads/2025/leet-journey/leet-journey-0.png"
 						srcset="content/uploads/2025/leet-journey/leet-journey-0.png 640w, content/uploads/2025/leet-journey/leet-journey-0.png 1280w"
 						sizes="(max-width: 1020px) 100vw, 50vw"
-						alt="Leet Journey – LeetCode preparation notes in Obsidian">
+						alt="Leet Journey - LeetCode preparation notes in Obsidian">
 					<span>
 						<span>Leet Journey</span>
 						<span>Obsidian Notes</span>
@@ -170,7 +129,7 @@
 				</a>
 
 				<a href="/projects/birdsong-mathematical-model/" data-color="#f2a7a7"
-					data-title="Bird Song – Mathematical Model" data-date="20251113">
+					data-title="Bird Song - Mathematical Model" data-date="20251113">
 					<img src="content/uploads/2025/bird-song/bird-song-0.png"
 						srcset="content/uploads/2025/bird-song/bird-song-0.png 640w, content/uploads/2025/bird-song/bird-song-0.png 1280w"
 						sizes="(max-width: 1020px) 100vw, 50vw"
@@ -195,112 +154,88 @@
 
 	<script>
 	(function () {
-		const plane     = document.getElementById('paper-plane');
-		const trailPath = document.getElementById('plane-trail-path');
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-		// ── Bezier flight path ──────────────────────────────────────────
-		// We define a handful of waypoints as cubic bezier segments.
-		// The plane enters from off-screen left, arcs gently across,
-		// exits off-screen right, then instantly resets — seamless loop.
-		function buildPath (W, H) {
-			// Start off-screen left, end off-screen right
-			// Control points create a lazy S-curve across the viewport
-			return [
-				{ x: -40,    y: H * 0.30 },                        // start
-				{ cx1: W * 0.15, cy1: H * 0.10,
-				  cx2: W * 0.35, cy2: H * 0.55,
-				  x:  W * 0.50,  y:  H * 0.38 },                   // mid-left arc
-				{ cx1: W * 0.65, cy1: H * 0.20,
-				  cx2: W * 0.80, cy2: H * 0.60,
-				  x:  W + 40,    y:  H * 0.20 },                   // exit right
-			];
-		}
+		const canvas = document.getElementById('leaf-canvas');
+		const ctx    = canvas.getContext('2d');
+		const COUNT  = 18;
+		let W, H;
 
-		// Convert waypoints to SVG path string
-		function waypointsToD (pts) {
-			let d = `M ${pts[0].x} ${pts[0].y}`;
-			for (let i = 1; i < pts.length; i++) {
-				const p = pts[i];
-				d += ` C ${p.cx1} ${p.cy1}, ${p.cx2} ${p.cy2}, ${p.x} ${p.y}`;
-			}
-			return d;
-		}
-
-		// Get x,y + tangent angle at t along a cubic bezier
-		function cubicBezier (p0, p1, t) {
-			const mt = 1 - t;
-			const x = mt*mt*mt*p0.x + 3*mt*mt*t*p1.cx1 + 3*mt*t*t*p1.cx2 + t*t*t*p1.x;
-			const y = mt*mt*mt*p0.y + 3*mt*mt*t*p1.cy1 + 3*mt*t*t*p1.cy2 + t*t*t*p1.y;
-			// derivative for angle
-			const dx = 3*mt*mt*(p1.cx1-p0.x) + 6*mt*t*(p1.cx2-p1.cx1) + 3*t*t*(p1.x-p1.cx2);
-			const dy = 3*mt*mt*(p1.cy1-p0.y) + 6*mt*t*(p1.cy2-p1.cy1) + 3*t*t*(p1.y-p1.cy2);
-			return { x, y, angle: Math.atan2(dy, dx) * 180 / Math.PI };
-		}
-
-		// ── Animation state ─────────────────────────────────────────────
-		const DURATION = 14000; // ms for one full crossing
-		const TRAIL_LEN = 60;   // max trail points kept
-		const trail = [];
-		let startTime = null;
-		let pts, segments;
-
-		function resize () {
-			pts = buildPath(window.innerWidth, window.innerHeight);
-			segments = pts.slice(1); // bezier segments (exclude start point)
+		function resize() {
+			W = canvas.width  = window.innerWidth;
+			H = canvas.height = window.innerHeight;
 		}
 		resize();
 		window.addEventListener('resize', resize);
 
-		// ── Fade in after short delay ────────────────────────────────────
-		setTimeout(() => {
-			plane.style.transition = 'opacity 1.2s ease';
-			plane.style.opacity    = '0.28';
-		}, 800);
+		function rand(min, max) { return min + Math.random() * (max - min); }
 
-		// ── Main loop ────────────────────────────────────────────────────
-		function tick (ts) {
-			if (!startTime) startTime = ts;
-			const elapsed = (ts - startTime) % DURATION;
-			const progress = elapsed / DURATION; // 0 → 1
+		// Draw a leaf shape centred at origin
+		function drawLeaf(ctx, size) {
+			ctx.beginPath();
+			ctx.moveTo(0, -size);
+			ctx.bezierCurveTo( size * 0.9, -size * 0.5,  size * 0.9, size * 0.5,  0,  size);
+			ctx.bezierCurveTo(-size * 0.9,  size * 0.5, -size * 0.9, -size * 0.5, 0, -size);
+			ctx.closePath();
+		}
 
-			// Map progress across segments (2 segments, each covers 0.5 of progress)
-			const segCount  = segments.length;
-			const segIndex  = Math.min(Math.floor(progress * segCount), segCount - 1);
-			const segT      = (progress * segCount) - segIndex;
-			const p0        = segIndex === 0 ? pts[0] : pts[segIndex];
-			const p1        = segments[segIndex];
-			const pos       = cubicBezier(p0, p1, segT);
+		function Leaf(scattered) {
+			this.init(scattered);
+		}
 
-			// Move & rotate plane
-			plane.setAttribute('transform',
-				`translate(${pos.x - 12}, ${pos.y - 10}) rotate(${pos.angle}, 12, 10)`
-			);
+		Leaf.prototype.init = function(scattered) {
+			this.x      = scattered ? rand(0, W)   : rand(-30, -8);
+			this.y      = scattered ? rand(0, H)   : rand(0, H);
+			this.size   = rand(5, 12);
+			this.vx     = rand(0.35, 1.0);
+			this.vy     = rand(-0.25, 0.35);
+			this.wobA   = rand(0.6, 1.8);    // wobble amplitude px
+			this.wobF   = rand(0.01, 0.028); // wobble frequency
+			this.wobT   = rand(0, Math.PI * 2);
+			this.rot    = rand(0, Math.PI * 2);
+			this.rotV   = rand(-0.007, 0.007);
+			this.alpha  = rand(0.06, 0.17);
+		};
 
-			// Trail
-			trail.push({ x: pos.x, y: pos.y });
-			if (trail.length > TRAIL_LEN) trail.shift();
-
-			if (trail.length > 1) {
-				let d = `M ${trail[0].x} ${trail[0].y}`;
-				for (let i = 1; i < trail.length; i++) {
-					d += ` L ${trail[i].x} ${trail[i].y}`;
-				}
-				trailPath.setAttribute('d', d);
+		Leaf.prototype.update = function() {
+			this.wobT += this.wobF;
+			this.x   += this.vx + Math.sin(this.wobT) * this.wobA;
+			this.y   += this.vy + Math.cos(this.wobT) * this.wobA * 0.4;
+			this.rot += this.rotV;
+			if (this.x > W + 20 || this.y > H + 20 || this.y < -20) {
+				this.init(false);
 			}
+		};
 
-			// Reset trail on loop restart
-			if (progress < 0.01 && trail.length > 5) trail.length = 0;
+		Leaf.prototype.draw = function(ctx, color) {
+			ctx.save();
+			ctx.translate(this.x, this.y);
+			ctx.rotate(this.rot);
+			ctx.globalAlpha = this.alpha;
+			drawLeaf(ctx, this.size);
+			ctx.fillStyle = color;
+			ctx.fill();
+			// midrib
+			ctx.beginPath();
+			ctx.moveTo(0, -this.size);
+			ctx.lineTo(0,  this.size);
+			ctx.strokeStyle = color;
+			ctx.lineWidth   = 0.5;
+			ctx.globalAlpha = this.alpha * 0.45;
+			ctx.stroke();
+			ctx.restore();
+		};
 
+		const leaves = Array.from({ length: COUNT }, () => new Leaf(true));
+
+		function tick() {
+			ctx.clearRect(0, 0, W, H);
+			const color = getComputedStyle(document.body).color || '#000';
+			leaves.forEach(l => { l.update(); l.draw(ctx, color); });
 			requestAnimationFrame(tick);
 		}
 
-		// Respect prefers-reduced-motion
-		if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-			requestAnimationFrame(tick);
-		} else {
-			// Hide entirely for users who prefer no motion
-			document.getElementById('plane-canvas').style.display = 'none';
-		}
+		requestAnimationFrame(tick);
 	})();
 	</script>
 
