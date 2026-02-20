@@ -199,8 +199,7 @@
 			}
 
 			// ── Random star field ─────────────────────────────────────────────
-			// Each star: { x, y, radius, baseAlpha, t, speed }
-			// We use fractional positions so they scale on resize.
+			// Smaller radii, brighter alphas, wider twinkle swing, faster speed
 			const STAR_COUNT = 220;
 			const stars = Array.from({ length: STAR_COUNT }, () => {
 				const big = Math.random() < 0.18; // ~18% are big/bright
@@ -208,13 +207,13 @@
 					fx:        Math.random(),          // fractional x  0..1
 					fy:        Math.random(),          // fractional y  0..1
 					radius:    big
-					             ? 1.8 + Math.random() * 2.4   // big:   1.8 – 4.2
-					             : 0.4 + Math.random() * 1.2,  // small: 0.4 – 1.6
+					             ? 0.8 + Math.random() * 1.2   // big:   0.8 – 2.0  (was 1.8–4.2)
+					             : 0.3 + Math.random() * 0.6,  // small: 0.3 – 0.9  (was 0.4–1.6)
 					baseAlpha: big
-					             ? 0.40 + Math.random() * 0.35 // big:   0.40 – 0.75
-					             : 0.10 + Math.random() * 0.22, // small: 0.10 – 0.32
+					             ? 0.55 + Math.random() * 0.35 // big:   0.55 – 0.90 (was 0.40–0.75)
+					             : 0.25 + Math.random() * 0.30, // small: 0.25 – 0.55 (was 0.10–0.32)
 					t:         Math.random() * Math.PI * 2,
-					speed:     0.008 + Math.random() * 0.025
+					speed:     0.015 + Math.random() * 0.030  // faster: was 0.008–0.033
 				};
 			});
 
@@ -229,7 +228,7 @@
 			let geminiPos = []; // absolute pixel positions, rebuilt on resize
 			const geminiSparkle = GEMINI_MAG.map(() => ({
 				t:     Math.random() * Math.PI * 2,
-				speed: 0.018 + Math.random() * 0.022
+				speed: 0.020 + Math.random() * 0.025  // slightly faster than before
 			}));
 
 			function buildGemini() {
@@ -255,9 +254,9 @@
 				// — Draw random starfield —
 				stars.forEach(s => {
 					s.t += s.speed;
-					const sf    = 0.5 + 0.5 * Math.sin(s.t);       // 0..1 sparkle
-					const alpha = s.baseAlpha * (0.45 + 0.55 * sf);
-					const r     = s.radius   * (0.80 + 0.20 * sf);
+					const sf    = 0.5 + 0.5 * Math.sin(s.t);         // 0..1 sparkle
+					const alpha = s.baseAlpha * (0.25 + 0.75 * sf);   // wider swing: was 0.45+0.55
+					const r     = s.radius   * (0.90 + 0.10 * sf);    // steadier size: was 0.80+0.20
 					drawStar(s.fx * W, s.fy * H, r, alpha, color);
 				});
 
@@ -271,13 +270,13 @@
 					ctx.stroke();
 				});
 
-				// — Draw Gemini stars (slightly brighter than field stars) —
+				// — Draw Gemini stars (smaller but brighter twinkle to match field) —
 				GEMINI_MAG.forEach((mag, si) => {
 					const sp    = geminiSparkle[si];
 					sp.t       += sp.speed;
 					const sf    = 0.5 + 0.5 * Math.sin(sp.t);
-					const alpha = (0.22 + mag * 0.45) * (0.50 + 0.50 * sf);
-					const r     = (1.8  + mag * 3.2)  * (0.85 + 0.15 * sf);
+					const alpha = (0.30 + mag * 0.50) * (0.30 + 0.70 * sf);  // brighter, wider swing
+					const r     = (1.2  + mag * 2.0)  * (0.90 + 0.10 * sf);  // smaller: was 1.8+mag*3.2
 					drawStar(geminiPos[si].x, geminiPos[si].y, r, alpha, color);
 				});
 
