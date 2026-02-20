@@ -311,333 +311,102 @@
 
 	<script>
 		(function () {
-			// ── Graph data ──────────────────────────────────────────────
 			const nodes = [
-				// centre
-				{
-					id: "Hulash",
-					group: "me",
-					url: "/info/"
-				},
-				// projects
-				{
-					id: "Celestian Labs",
-					group: "project",
-					url: "/projects/celestian-labs/"
-				},
-				{
-					id: "System Design",
-					group: "project",
-					url: "/projects/system-design-architecture/"
-				},
-				{
-					id: "Bird Song Model",
-					group: "project",
-					url: "/projects/birdsong-mathematical-model/"
-				},
-				{
-					id: "Leet Journey",
-					group: "project",
-					url: "/projects/leetjourney-obsidian-notes/"
-				},
-				// skills
-				{
-					id: "AWS",
-					group: "skill",
-					url: null
-				},
-				{
-					id: "Python",
-					group: "skill",
-					url: null
-				},
-				{
-					id: "Kafka",
-					group: "skill",
-					url: null
-				},
-				{
-					id: "Spark",
-					group: "skill",
-					url: null
-				},
-				{
-					id: "Next.js",
-					group: "skill",
-					url: null
-				},
-				{
-					id: "SQL",
-					group: "skill",
-					url: null
-				},
-				{
-					id: "Docker",
-					group: "skill",
-					url: null
-				},
-				// tools
-				{
-					id: "Obsidian",
-					group: "tool",
-					url: null
-				},
-				{
-					id: "Airflow",
-					group: "tool",
-					url: null
-				},
-				{
-					id: "Terraform",
-					group: "tool",
-					url: null
-				},
-				{
-					id: "Databricks",
-					group: "tool",
-					url: null
-				},
+				{ id: "Hulash", group: "me", url: "/info/" },
+				{ id: "Celestian Labs", group: "project", url: "/projects/celestian-labs/" },
+				{ id: "System Design", group: "project", url: "/projects/system-design-architecture/" },
+				{ id: "Bird Song Model", group: "project", url: "/projects/birdsong-mathematical-model/" },
+				{ id: "Leet Journey", group: "project", url: "/projects/leetjourney-obsidian-notes/" },
+				{ id: "AWS", group: "skill", url: null },
+				{ id: "Python", group: "skill", url: null },
+				{ id: "Kafka", group: "skill", url: null },
+				{ id: "Spark", group: "skill", url: null },
+				{ id: "Next.js", group: "skill", url: null },
+				{ id: "SQL", group: "skill", url: null },
+				{ id: "Docker", group: "skill", url: null },
+				{ id: "Obsidian", group: "tool", url: null },
+				{ id: "Airflow", group: "tool", url: null },
+				{ id: "Terraform", group: "tool", url: null },
+				{ id: "Databricks", group: "tool", url: null },
 			];
-
 			const links = [
-				// me → projects
-				{
-					source: "Hulash",
-					target: "Celestian Labs"
-				},
-				{
-					source: "Hulash",
-					target: "System Design"
-				},
-				{
-					source: "Hulash",
-					target: "Bird Song Model"
-				},
-				{
-					source: "Hulash",
-					target: "Leet Journey"
-				},
-				// me → skills
-				{
-					source: "Hulash",
-					target: "AWS"
-				},
-				{
-					source: "Hulash",
-					target: "Python"
-				},
-				{
-					source: "Hulash",
-					target: "Next.js"
-				},
-				{
-					source: "Hulash",
-					target: "SQL"
-				},
-				// projects → skills
-				{
-					source: "Celestian Labs",
-					target: "Python"
-				},
-				{
-					source: "Celestian Labs",
-					target: "AWS"
-				},
-				{
-					source: "System Design",
-					target: "Kafka"
-				},
-				{
-					source: "System Design",
-					target: "Docker"
-				},
-				{
-					source: "System Design",
-					target: "AWS"
-				},
-				{
-					source: "Bird Song Model",
-					target: "Python"
-				},
-				{
-					source: "Bird Song Model",
-					target: "SQL"
-				},
-				{
-					source: "Leet Journey",
-					target: "Python"
-				},
-				{
-					source: "Leet Journey",
-					target: "Obsidian"
-				},
-				// skills → tools
-				{
-					source: "AWS",
-					target: "Terraform"
-				},
-				{
-					source: "Kafka",
-					target: "Spark"
-				},
-				{
-					source: "Spark",
-					target: "Databricks"
-				},
-				{
-					source: "Airflow",
-					target: "Python"
-				},
-				{
-					source: "Hulash",
-					target: "Airflow"
-				},
+				{ source: "Hulash", target: "Celestian Labs" },
+				{ source: "Hulash", target: "System Design" },
+				{ source: "Hulash", target: "Bird Song Model" },
+				{ source: "Hulash", target: "Leet Journey" },
+				{ source: "Hulash", target: "AWS" },
+				{ source: "Hulash", target: "Python" },
+				{ source: "Hulash", target: "Next.js" },
+				{ source: "Hulash", target: "SQL" },
+				{ source: "Celestian Labs", target: "Python" },
+				{ source: "Celestian Labs", target: "AWS" },
+				{ source: "System Design", target: "Kafka" },
+				{ source: "System Design", target: "Docker" },
+				{ source: "System Design", target: "AWS" },
+				{ source: "Bird Song Model", target: "Python" },
+				{ source: "Bird Song Model", target: "SQL" },
+				{ source: "Leet Journey", target: "Python" },
+				{ source: "Leet Journey", target: "Obsidian" },
+				{ source: "AWS", target: "Terraform" },
+				{ source: "Kafka", target: "Spark" },
+				{ source: "Spark", target: "Databricks" },
+				{ source: "Airflow", target: "Python" },
+				{ source: "Hulash", target: "Airflow" },
 			];
-
-			const palette = {
-				me: "#7c6af7",
-				project: "#4fc3f7",
-				skill: "#81c784",
-				tool: "#ffb74d",
-			};
-
-			const radius = {
-				me: 18,
-				project: 13,
-				skill: 9,
-				tool: 8
-			};
-
-			// ── Init after tab is first activated ──────────────────────
+			const palette = { me: "#7c6af7", project: "#4fc3f7", skill: "#81c784", tool: "#ffb74d" };
+			const radius  = { me: 18, project: 13, skill: 9, tool: 8 };
 			let graphInited = false;
-
 			function initGraph() {
 				if (graphInited) return;
 				graphInited = true;
-
 				const wrapper = document.getElementById('graph-wrapper');
 				const W = wrapper.clientWidth || 700;
 				const H = wrapper.clientHeight || 480;
 				const tooltip = document.getElementById('graph-tooltip');
-
-				const svg = d3.select('#graph-svg')
-					.attr('viewBox', [0, 0, W, H]);
-
-				// zoom
+				const svg = d3.select('#graph-svg').attr('viewBox', [0, 0, W, H]);
 				const g = svg.append('g');
-				svg.call(
-					d3.zoom()
-					.scaleExtent([0.3, 4])
-					.on('zoom', e => g.attr('transform', e.transform))
-				);
-
-				// simulation
+				svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', e => g.attr('transform', e.transform)));
 				const sim = d3.forceSimulation(nodes)
 					.force('link', d3.forceLink(links).id(d => d.id).distance(90).strength(0.7))
 					.force('charge', d3.forceManyBody().strength(-260))
 					.force('center', d3.forceCenter(W / 2, H / 2))
 					.force('collide', d3.forceCollide(d => radius[d.group] + 14));
-
-				// glow filter
 				const defs = svg.append('defs');
 				const filter = defs.append('filter').attr('id', 'glow');
 				filter.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'coloredBlur');
 				const feMerge = filter.append('feMerge');
 				feMerge.append('feMergeNode').attr('in', 'coloredBlur');
 				feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
-
-				// links
-				const link = g.append('g')
-					.selectAll('line')
-					.data(links)
-					.join('line')
-					.attr('stroke', '#333')
-					.attr('stroke-width', 1.2)
-					.attr('stroke-opacity', 0.7);
-
-				// nodes
-				const node = g.append('g')
-					.selectAll('circle')
-					.data(nodes)
-					.join('circle')
-					.attr('r', d => radius[d.group])
-					.attr('fill', d => palette[d.group])
-					.attr('stroke', '#0d0d0d')
-					.attr('stroke-width', 1.5)
-					.style('filter', 'url(#glow)')
-					.style('cursor', d => d.url ? 'pointer' : 'default')
-					.call(
-						d3.drag()
-						.on('start', (e, d) => {
-							if (!e.active) sim.alphaTarget(0.3).restart();
-							d.fx = d.x;
-							d.fy = d.y;
-						})
-						.on('drag', (e, d) => {
-							d.fx = e.x;
-							d.fy = e.y;
-						})
-						.on('end', (e, d) => {
-							if (!e.active) sim.alphaTarget(0);
-							d.fx = null;
-							d.fy = null;
-						})
+				const link = g.append('g').selectAll('line').data(links).join('line')
+					.attr('stroke', '#333').attr('stroke-width', 1.2).attr('stroke-opacity', 0.7);
+				const node = g.append('g').selectAll('circle').data(nodes).join('circle')
+					.attr('r', d => radius[d.group]).attr('fill', d => palette[d.group])
+					.attr('stroke', '#0d0d0d').attr('stroke-width', 1.5)
+					.style('filter', 'url(#glow)').style('cursor', d => d.url ? 'pointer' : 'default')
+					.call(d3.drag()
+						.on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+						.on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+						.on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
 					)
-					.on('mouseover', function (e, d) {
-						d3.select(this).attr('r', radius[d.group] + 4);
-						tooltip.style.opacity = '1';
-						tooltip.textContent = d.url ? `→ ${d.id}` : d.id;
-					})
-					.on('mousemove', function (e) {
-						const rect = wrapper.getBoundingClientRect();
-						tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
-						tooltip.style.top = (e.clientY - rect.top - 28) + 'px';
-					})
-					.on('mouseout', function (e, d) {
-						d3.select(this).attr('r', radius[d.group]);
-						tooltip.style.opacity = '0';
-					})
-					.on('click', (e, d) => {
-						if (d.url) window.location.href = d.url;
-					});
-
-				// labels
-				const label = g.append('g')
-					.selectAll('text')
-					.data(nodes)
-					.join('text')
-					.attr('class', 'g-label')
-					.attr('dy', d => -radius[d.group] - 4)
-					.attr('text-anchor', 'middle')
-					.text(d => d.id);
-
-				// tick
+					.on('mouseover', function (e, d) { d3.select(this).attr('r', radius[d.group] + 4); tooltip.style.opacity = '1'; tooltip.textContent = d.url ? `→ ${d.id}` : d.id; })
+					.on('mousemove', function (e) { const rect = wrapper.getBoundingClientRect(); tooltip.style.left = (e.clientX - rect.left + 12) + 'px'; tooltip.style.top = (e.clientY - rect.top - 28) + 'px'; })
+					.on('mouseout',  function (e, d) { d3.select(this).attr('r', radius[d.group]); tooltip.style.opacity = '0'; })
+					.on('click', (e, d) => { if (d.url) window.location.href = d.url; });
+				const label = g.append('g').selectAll('text').data(nodes).join('text')
+					.attr('class', 'g-label').attr('dy', d => -radius[d.group] - 4).attr('text-anchor', 'middle').text(d => d.id);
 				sim.on('tick', () => {
-					link
-						.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
-						.attr('x2', d => d.target.x).attr('y2', d => d.target.y);
-					node
-						.attr('cx', d => d.x)
-						.attr('cy', d => d.y);
-					label
-						.attr('x', d => d.x)
-						.attr('y', d => d.y);
+					link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+					node.attr('cx', d => d.x).attr('cy', d => d.y);
+					label.attr('x', d => d.x).attr('y', d => d.y);
 				});
 			}
-
-			// Watch for graph tab activation
-			document.getElementById('tab-graph').addEventListener('change', function () {
-				if (this.checked) {
-					// small delay so the pane is visible and has dimensions
-					setTimeout(initGraph, 60);
-				}
-			});
-			// Also handle label click (label triggers input change)
-			document.querySelector('label[for="tab-graph"]').addEventListener('click', function () {
-				setTimeout(initGraph, 80);
-			});
+			document.getElementById('tab-graph').addEventListener('change', function () { if (this.checked) setTimeout(initGraph, 60); });
+			document.querySelector('label[for="tab-graph"]').addEventListener('click', function () { setTimeout(initGraph, 80); });
 		})();
 	</script>
+
+	<!-- Page transitions -->
+	<script src="/transitions.js"></script>
 
 </body>
 
