@@ -102,39 +102,217 @@
 
 
 				<div class="large">
-
 					<div>
-
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Vinyl-Suite-1-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Vinyl-Suite-1-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Vinyl-Suite-1-1600x1600.png 2400w"
-							sizes="100vw" alt="">
+						<a href="https://hulashc.github.io/birdsong" class="project-link" target="_blank"
+							rel="noopener">
+							<iframe src="https://hulashc.github.io/birdsong" title="Spatiotemporal Acoustic Manifold"
+								loading="lazy" allow="autoplay" style="
+          width: 100%;
+          height: 100%;
+          min-height: 480px;
+          border: none;
+          display: block;
+          background: #050508;
+          pointer-events: all;
+        "></iframe>
+						</a>
 					</div>
-
 				</div>
+
 
 
 				<div class="large">
+					<div style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 80px;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    height: 100%;
+    min-height: 480px;
+  ">
+						<h3 style="
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 32px;
+      border-left: 3px solid #00ffcc;
+      padding-left: 20px;
+    ">Spatiotemporal Acoustic Manifold</h3>
 
-					<div>
+						<ul style="
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.75);
+      max-width: 700px;
+    ">
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #00ffcc;
+          font-weight: 600;
+        ">→</span>
+								Birdsong treated as a <strong style="color: #00ffcc">trajectory through 3D
+									space</strong> rather than just a waveform.
+							</li>
 
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Inner-A-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Inner-A-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Inner-A-1600x1600.png 2400w"
-							sizes="100vw" alt="">
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #00ffcc;
+          font-weight: 600;
+        ">→</span>
+								Each point encodes the <strong style="color: #00ffcc">timbre</strong> (tone colour) as
+								high‑dimensional MFCC features.
+							</li>
+
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #00ffcc;
+          font-weight: 600;
+        ">→</span>
+								PCA compresses features into <strong style="color: #00ffcc">PC1, PC2, PC3</strong> (X,
+								Y, Z axes).
+							</li>
+
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #00ffcc;
+          font-weight: 600;
+        ">→</span>
+								<strong style="color: #00ffcc">Loops, twists, clusters</strong> reveal phrases, motifs,
+								and tonal vs noisy sections.
+							</li>
+
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #00ffcc;
+          font-weight: 600;
+        ">→</span>
+								Inspired by Lucio Arese's <em>"Visualizing Bird Songs: A Mathematical Model"</em>,
+								adapted as an interactive web piece.
+							</li>
+						</ul>
 					</div>
-
 				</div>
+
 
 
 				<div class="large">
+					<div style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 80px;
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    height: 100%;
+    min-height: 480px;
+  ">
+						<h3 style="
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 32px;
+      border-left: 3px solid #ff6a00;
+      padding-left: 20px;
+    ">Technical Implementation</h3>
 
-					<div>
+						<div style="
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      max-width: 700px;
+    ">
+							<div style="margin-bottom: 28px;">
+								<h4 style="
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #ff6a00;
+          margin-bottom: 10px;
+        ">Feature Extraction · Python + librosa</h4>
+								<p style="margin: 0; padding-left: 16px;">
+									40 MFCCs + chroma + spectral centroid/bandwidth + rolloff + zero‑crossing rate per
+									frame.<br>
+									Features standardised and reduced to 3D with PCA.<br>
+									Frame‑aligned <code style="
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+          ">t</code> (time) and <code style="
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+          ">energy</code> (RMS) exported to JSON.
+								</p>
+							</div>
 
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-LABELS-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-LABELS-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-LABELS-1600x1600.png 2400w"
-							sizes="100vw" alt="">
+							<div style="margin-bottom: 28px;">
+								<h4 style="
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #00ffcc;
+          margin-bottom: 10px;
+        ">3D Manifold · Three.js + WebGL</h4>
+								<p style="margin: 0; padding-left: 16px;">
+									Points smoothed with Catmull–Rom spline to create a continuous ribbon path.<br>
+									Moving dot synced to <code style="
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+          ">audio.currentTime → frame index</code>.<br>
+									Dot <strong>size</strong> and <strong>colour</strong> map to energy (silence → blue,
+									peak calls → orange).
+								</p>
+							</div>
+
+							<div>
+								<h4 style="
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #3a6fff;
+          margin-bottom: 10px;
+        ">Visual Design</h4>
+								<p style="margin: 0; padding-left: 16px;">
+									Fading comet tail shows last 280 frames without cluttering the full path.<br>
+									Ghost trajectory reveals global shape at low opacity.<br>
+									Axes labelled as PC1 / PC2 / PC3 to emphasise the mathematical model.
+								</p>
+							</div>
+						</div>
 					</div>
-
 				</div>
+
 
 
 			</div>
@@ -152,13 +330,13 @@
 					<a href="#">Project Details<span></span></a>
 
 					<p>A mathematical model visualized to explore the patterns and structures in bird song compositions.
-						Inspired from the video above.</p>
+						Inspired from Lucio Arese's <em>"Visualizing Bird Songs: A Mathematical Model"</em>.</p>
 
 				</div>
 
 
 				<div id="project-info-counter">
-					<span>1</span><span>/5</span>
+					<span>1</span><span>/4</span>
 					<span class="next"></span>
 				</div>
 
