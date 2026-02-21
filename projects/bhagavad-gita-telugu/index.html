@@ -63,7 +63,8 @@
 								<p id="gita-chapter-label" style="font-size:0.6rem;color:#555;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.3rem;"></p>
 								<p id="gita-verse-number" style="font-size:0.65rem;color:#555;letter-spacing:0.12em;margin-bottom:1.6rem;">&mdash;</p>
 								<p id="gita-verse-text" style="font-size:1.2rem;line-height:2;color:#444;min-height:80px;font-style:italic;">లోడ్ అవుతోంది...</p>
-								<p id="gita-translation" style="font-size:0.82rem;line-height:1.75;color:#666;margin-top:1.2rem;font-style:normal;border-top:1px solid #1e1e1e;padding-top:1rem;"></p>
+								<p id="gita-translation" style="font-size:0.9rem;line-height:1.9;color:#b0c4de;margin-top:1.2rem;font-style:normal;border-top:1px solid #1e1e1e;padding-top:1rem;font-family:'Noto Sans Telugu',sans-serif;"></p>
+								<p id="gita-translating" style="font-size:0.72rem;color:#555;margin-top:0.4rem;font-style:italic;display:none;">తెలుగులోకి అనువదిస్తోంది...</p>
 								<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
 							</div>
 
@@ -133,6 +134,9 @@
 		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
 		const GITA_BASE = 'https://vedicscriptures.github.io';
 
+		// Telugu translation cache: key = "ch_vs", value = translated string
+		const teluguCache = {};
+
 		function gitaRandInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
@@ -159,32 +163,76 @@
 				const res = await fetch(GITA_BASE + '/slok/' + ch + '/' + vs);
 				if (!res.ok) throw new Error('not found');
 				const data = await res.json();
-				gitaDisplay(data, ch, vs);
+				await gitaDisplay(data, ch, vs);
 			} catch (e) {
 				gitaShowError('Could not load verse. Please try again.');
 			}
 		}
 
-		function gitaDisplay(data, ch, vs) {
+		// Translate Sanskrit slok text to Telugu using MyMemory API (free, no key required)
+		async function translateToTelugu(sanskritText, cacheKey) {
+			if (teluguCache[cacheKey]) return teluguCache[cacheKey];
+			try {
+				// MyMemory supports Sanskrit (sa) to Telugu (te) translation
+				const url = 'https://api.mymemory.translated.net/get?q=' +
+					encodeURIComponent(sanskritText) + '&langpair=sa|te';
+				const res = await fetch(url);
+				if (!res.ok) throw new Error('translation api error');
+				const json = await res.json();
+				if (json.responseStatus === 200 && json.responseData && json.responseData.translatedText) {
+					const translated = json.responseData.translatedText;
+					teluguCache[cacheKey] = translated;
+					return translated;
+				}
+				throw new Error('no translation returned');
+			} catch (e) {
+				return null;
+			}
+		}
+
+		async function gitaDisplay(data, ch, vs) {
 			document.getElementById('gita-chapter-label').textContent = 'అధ్యాయం ' + ch;
 			document.getElementById('gita-verse-number').textContent = 'శ్లోకం ' + vs;
 			const el = document.getElementById('gita-verse-text');
-			el.textContent = data.slok || '';
+			const slokText = data.slok || '';
+			el.textContent = slokText;
 			el.style.color = '#ddd';
-			// English translation — try multiple commentary fields
-			const tr = (data.siva && data.siva.et) ? data.siva.et
-				: (data.tej && data.tej.et) ? data.tej.et
-				: (data.purohit && data.purohit.et) ? data.purohit.et
-				: (data.ram && data.ram.et) ? data.ram.et
-				: '';
+
 			const tel = document.getElementById('gita-translation');
-			if (tr) {
-				tel.textContent = '\u201c' + tr + '\u201d';
-				tel.style.display = 'block';
-			} else {
-				tel.style.display = 'none';
-			}
+			const transIndicator = document.getElementById('gita-translating');
+
+			// Show translating indicator
+			tel.textContent = '';
+			tel.style.display = 'none';
+			transIndicator.style.display = 'block';
+
 			document.getElementById('gita-error').textContent = '';
+
+			// Fetch Telugu translation from MyMemory API
+			if (slokText) {
+				const cacheKey = ch + '_' + vs;
+				const teluguText = await translateToTelugu(slokText, cacheKey);
+				transIndicator.style.display = 'none';
+				if (teluguText) {
+					tel.textContent = '\u201c' + teluguText + '\u201d';
+					tel.style.display = 'block';
+				} else {
+					// Fallback: show English translation if Telugu fails
+					const enTr = (data.siva && data.siva.et) ? data.siva.et
+						: (data.tej && data.tej.et) ? data.tej.et
+						: (data.purohit && data.purohit.et) ? data.purohit.et
+						: (data.ram && data.ram.et) ? data.ram.et
+						: '';
+					if (enTr) {
+						tel.textContent = '\u201c' + enTr + '\u201d';
+						tel.style.display = 'block';
+					} else {
+						tel.style.display = 'none';
+					}
+				}
+			} else {
+				transIndicator.style.display = 'none';
+			}
 		}
 
 		function gitaSetLoading() {
@@ -194,12 +242,14 @@
 			document.getElementById('gita-chapter-label').textContent = '';
 			document.getElementById('gita-translation').textContent = '';
 			document.getElementById('gita-translation').style.display = 'none';
+			document.getElementById('gita-translating').style.display = 'none';
 			document.getElementById('gita-error').textContent = '';
 		}
 
 		function gitaShowError(msg) {
 			document.getElementById('gita-verse-text').textContent = '';
 			document.getElementById('gita-translation').style.display = 'none';
+			document.getElementById('gita-translating').style.display = 'none';
 			document.getElementById('gita-error').textContent = msg;
 		}
 
