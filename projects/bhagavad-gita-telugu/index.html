@@ -50,46 +50,30 @@
 
 			<div id="project-slides">
 
-
-				<!-- SLIDE 1: Telugu Verse Generator -->
+				<!-- SLIDE 1: Verse Generator -->
 				<div class="large">
-					<div style="
-						display:flex;
-						flex-direction:column;
-						justify-content:center;
-						align-items:center;
-						padding:60px 80px;
-						background:#0a0a0a;
-						height:100%;
-						min-height:480px;
-					">
-						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">భగవద్గీత &middot; Telugu Verse Generator</p>
+					<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px;background:#0a0a0a;height:100%;min-height:480px;">
 
-						<!-- stop ALL clicks/mousedowns here from bubbling to the slide listener -->
-						<div id="gita-interactive"
-							onclick="event.stopPropagation();"
-							onmousedown="event.stopPropagation();"
-							ontouchstart="event.stopPropagation();"
-							style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:660px;">
+						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">భగవద్గీత &middot; Verse Generator</p>
 
-							<div style="width:100%;border:1px solid #222;padding:2.5rem 2.5rem;text-align:center;background:#111;border-radius:2px;">
-								<p id="gita-chapter-label" style="font-size:0.65rem;color:#555;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem;"></p>
-								<p id="gita-verse-number" style="font-size:0.7rem;color:#666;letter-spacing:0.12em;margin-bottom:1.8rem;">&mdash;</p>
-								<p id="gita-verse-text" style="font-size:1.25rem;line-height:2.1;color:#444;min-height:80px;">లోడ్ అవుతోంది...</p>
+						<!-- All interaction wrapped — stops clicks bubbling to slide listener -->
+						<div id="gita-interactive" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:680px;">
+
+							<div style="width:100%;border:1px solid #222;padding:2.5rem;text-align:center;background:#111;border-radius:2px;">
+								<p id="gita-chapter-label" style="font-size:0.6rem;color:#555;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.3rem;"></p>
+								<p id="gita-verse-number" style="font-size:0.65rem;color:#555;letter-spacing:0.12em;margin-bottom:1.6rem;">&mdash;</p>
+								<p id="gita-verse-text" style="font-size:1.2rem;line-height:2;color:#444;min-height:80px;font-style:italic;">లోడ్ అవుతోంది...</p>
+								<p id="gita-translation" style="font-size:0.82rem;line-height:1.75;color:#666;margin-top:1.2rem;font-style:normal;border-top:1px solid #1e1e1e;padding-top:1rem;"></p>
 								<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
 							</div>
 
 							<div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;">
-								<button
-									onclick="event.stopPropagation(); gitaFetchRandom();"
-									onmousedown="event.stopPropagation();"
+								<button id="btn-random"
 									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
 									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Random Verse</button>
 
-								<button
-									onclick="event.stopPropagation(); gitaToggleInput();"
-									onmousedown="event.stopPropagation();"
+								<button id="btn-goto"
 									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
 									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Go to Verse</button>
@@ -97,16 +81,10 @@
 
 							<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:1.2rem;justify-content:center;flex-wrap:wrap;">
 								<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
-									onclick="event.stopPropagation();"
-									onmousedown="event.stopPropagation();"
 									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
 								<input type="number" id="gita-vs" placeholder="Vs" min="1"
-									onclick="event.stopPropagation();"
-									onmousedown="event.stopPropagation();"
 									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
-								<button
-									onclick="event.stopPropagation(); gitaFetchSpecific();"
-									onmousedown="event.stopPropagation();"
+								<button id="btn-go"
 									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;">Go</button>
 							</div>
 
@@ -114,48 +92,20 @@
 					</div>
 				</div>
 
-
-				<!-- SLIDE 2: Importance of Bhagavad Gita -->
+				<!-- SLIDE 2: About the Gita -->
 				<div class="large">
-					<div style="
-						display:flex;
-						flex-direction:column;
-						justify-content:center;
-						align-items:flex-start;
-						padding:60px 80px;
-						background:linear-gradient(135deg, #0a0a0a 0%, #141008 100%);
-						height:100%;
-						min-height:480px;
-					">
+					<div style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:60px 80px;background:linear-gradient(135deg,#0a0a0a 0%,#141008 100%);height:100%;min-height:480px;">
 						<h3 style="font-size:26px;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:#fff;margin-bottom:32px;border-left:3px solid #f5c842;padding-left:20px;">Why the Bhagavad Gita Endures</h3>
-
 						<ul style="list-style:none;padding:0;margin:0;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.75);max-width:700px;">
-							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
-								A <strong style="color:#f5c842">5,000-year-old dialogue</strong> between Arjuna and Krishna &mdash; distilled into 700 verses on duty, action, and the self.
-							</li>
-							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
-								The concept of <strong style="color:#f5c842">Nishkama Karma</strong> &mdash; act without attachment to outcomes &mdash; has influenced thinkers from Thoreau to Gandhi.
-							</li>
-							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
-								The battlefield is a metaphor for <strong style="color:#f5c842">inner conflict</strong> &mdash; the war between duty and desire every person faces.
-							</li>
-							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
-								18 chapters, each a <strong style="color:#f5c842">distinct path</strong> &mdash; Karma Yoga (action), Jnana Yoga (knowledge), Bhakti Yoga (devotion).
-							</li>
-							<li style="margin-bottom:0;padding-left:24px;position:relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
-								This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> &mdash; making ancient Telugu text accessible and programmable for the modern web.
-							</li>
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;"><span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>A <strong style="color:#f5c842">5,000-year-old dialogue</strong> between Arjuna and Krishna &mdash; 700 verses on duty, action, and the self.</li>
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;"><span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>The concept of <strong style="color:#f5c842">Nishkama Karma</strong> &mdash; act without attachment to outcomes &mdash; influenced thinkers from Thoreau to Gandhi.</li>
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;"><span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>The battlefield is a metaphor for <strong style="color:#f5c842">inner conflict</strong> &mdash; the war between duty and desire every person faces.</li>
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;"><span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>18 chapters, each a <strong style="color:#f5c842">distinct path</strong> &mdash; Karma Yoga (action), Jnana Yoga (knowledge), Bhakti Yoga (devotion).</li>
+							<li style="margin-bottom:0;padding-left:24px;position:relative;"><span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> &mdash; making ancient text accessible and programmable for the modern web.</li>
 						</ul>
-
-						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; gita-api.vercel.app &middot; Telugu (te)</p>
+						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; vedicscriptures.github.io</p>
 					</div>
 				</div>
-
 
 			</div>
 
@@ -164,12 +114,10 @@
 					<span>Bhagavad Gita</span>
 					<span>Telugu Verses</span>
 				</h2>
-
 				<div id="project-info-details" class="more">
-					<a href="https://gita-api.vercel.app" target="_blank" rel="noopener"><span>gita-api.vercel.app</span></a>
-					<p>Live Telugu verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and verse, or let chance guide you.</p>
+					<a href="https://vedicscriptures.github.io" target="_blank" rel="noopener"><span>vedicscriptures.github.io</span></a>
+					<p>Live verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and verse, or let chance guide you.</p>
 				</div>
-
 				<div id="project-info-counter">
 					<span>1</span><span>/2</span>
 					<span class="next"></span>
@@ -183,12 +131,7 @@
 
 	<script>
 		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
-
-		// Use allorigins CORS proxy to bypass CORS block on gita-api.vercel.app
-		function gitaProxyUrl(path) {
-			const target = encodeURIComponent('https://gita-api.vercel.app' + path);
-			return 'https://api.allorigins.win/get?url=' + target;
-		}
+		const GITA_BASE = 'https://vedicscriptures.github.io';
 
 		function gitaRandInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -205,16 +148,17 @@
 			const ch = parseInt(document.getElementById('gita-ch').value);
 			const vs = parseInt(document.getElementById('gita-vs').value);
 			if (!ch || !vs) { gitaShowError('Enter both chapter and verse.'); return; }
+			if (ch < 1 || ch > 18) { gitaShowError('Chapter must be 1\u201318.'); return; }
+			if (vs < 1 || vs > GITA_CHAPTERS[ch - 1]) { gitaShowError('Verse ' + vs + ' does not exist in chapter ' + ch + '.'); return; }
 			gitaSetLoading();
 			await gitaLoad(ch, vs);
 		}
 
 		async function gitaLoad(ch, vs) {
 			try {
-				const res = await fetch(gitaProxyUrl('/verse/' + ch + '/' + vs));
-				if (!res.ok) throw new Error('fetch failed');
-				const wrapper = await res.json();
-				const data = JSON.parse(wrapper.contents);
+				const res = await fetch(GITA_BASE + '/slok/' + ch + '/' + vs);
+				if (!res.ok) throw new Error('not found');
+				const data = await res.json();
 				gitaDisplay(data, ch, vs);
 			} catch (e) {
 				gitaShowError('Could not load verse. Please try again.');
@@ -224,10 +168,22 @@
 		function gitaDisplay(data, ch, vs) {
 			document.getElementById('gita-chapter-label').textContent = 'అధ్యాయం ' + ch;
 			document.getElementById('gita-verse-number').textContent = 'శ్లోకం ' + vs;
-			const text = data.text || data.verse || data.slok || '';
 			const el = document.getElementById('gita-verse-text');
-			el.textContent = text || JSON.stringify(data);
+			el.textContent = data.slok || '';
 			el.style.color = '#ddd';
+			// English translation — try multiple commentary fields
+			const tr = (data.siva && data.siva.et) ? data.siva.et
+				: (data.tej && data.tej.et) ? data.tej.et
+				: (data.purohit && data.purohit.et) ? data.purohit.et
+				: (data.ram && data.ram.et) ? data.ram.et
+				: '';
+			const tel = document.getElementById('gita-translation');
+			if (tr) {
+				tel.textContent = '\u201c' + tr + '\u201d';
+				tel.style.display = 'block';
+			} else {
+				tel.style.display = 'none';
+			}
 			document.getElementById('gita-error').textContent = '';
 		}
 
@@ -236,11 +192,14 @@
 			document.getElementById('gita-verse-text').style.color = '#444';
 			document.getElementById('gita-verse-number').textContent = '\u2014';
 			document.getElementById('gita-chapter-label').textContent = '';
+			document.getElementById('gita-translation').textContent = '';
+			document.getElementById('gita-translation').style.display = 'none';
 			document.getElementById('gita-error').textContent = '';
 		}
 
 		function gitaShowError(msg) {
 			document.getElementById('gita-verse-text').textContent = '';
+			document.getElementById('gita-translation').style.display = 'none';
 			document.getElementById('gita-error').textContent = msg;
 		}
 
@@ -249,14 +208,16 @@
 			box.style.display = box.style.display === 'none' ? 'flex' : 'none';
 		}
 
-		// Block all interaction events on the interactive area from reaching the slide listener
+		// Block all interaction events bubbling up to the slide listener
 		document.addEventListener('DOMContentLoaded', function () {
 			var el = document.getElementById('gita-interactive');
-			if (el) {
-				['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(function(evt) {
-					el.addEventListener(evt, function(e) { e.stopPropagation(); });
-				});
-			}
+			if (!el) return;
+			['click','mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(function(evt) {
+				el.addEventListener(evt, function(e) { e.stopPropagation(); }, true);
+			});
+			document.getElementById('btn-random').addEventListener('click', function(e) { e.stopPropagation(); gitaFetchRandom(); });
+			document.getElementById('btn-goto').addEventListener('click', function(e) { e.stopPropagation(); gitaToggleInput(); });
+			document.getElementById('btn-go').addEventListener('click', function(e) { e.stopPropagation(); gitaFetchSpecific(); });
 		});
 
 		gitaFetchRandom();
