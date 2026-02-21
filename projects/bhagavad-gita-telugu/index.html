@@ -150,86 +150,91 @@
 			margin: 0.4rem 0 0 0;
 		}
 
-		/* Slide 2 styles */
+		/* Slide 2 styles (REPLACE existing Slide 2 styles with this) */
 		.nlp-slide-wrap {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			padding: 40px 50px;
+			padding: 56px 64px;
 			background: #0a0a0a;
 			min-height: 100%;
 			box-sizing: border-box;
-			overflow-y: auto;
 		}
 
 		.nlp-card {
-			max-width: 700px;
 			width: 100%;
+			max-width: 820px;
 			background: #111;
-			border: 1px solid rgba(245, 200, 66, 0.18);
-			padding: 2rem 2.4rem;
+			border: 1px solid rgba(245, 200, 66, 0.22);
+			padding: 32px 36px;
 			box-sizing: border-box;
-			overflow: hidden;
+			border-radius: 6px;
 		}
 
 		.nlp-card-title {
-			font-size: 0.72rem;
-			font-weight: 400;
-			letter-spacing: 0.22em;
-			color: #f5c842;
-			text-transform: uppercase;
-			margin: 0 0 1.6rem 0;
+			margin: 0 0 20px 0;
 			text-align: center;
-			line-height: 1.6;
+			font-size: 1.35rem;
+			/* was 0.72rem */
+			font-weight: 600;
+			/* was 400 */
+			letter-spacing: 0.02em;
+			/* was 0.22em (way too spaced) */
+			text-transform: none;
+			/* was uppercase (makes it look “label-y”) */
+			line-height: 1.25;
+			color: rgba(255, 255, 255, 0.92);
 		}
 
 		.nlp-rows {
 			display: flex;
 			flex-direction: column;
-			gap: 0;
+			gap: 12px;
+			/* was gap: 0 */
 		}
 
 		.nlp-row {
 			display: flex;
 			align-items: flex-start;
-			gap: 0.85rem;
-			padding: 0.7rem 0;
-			border-bottom: 1px solid #1a1a1a;
-		}
-
-		.nlp-row:last-child {
-			border-bottom: none;
+			gap: 12px;
+			padding: 10px 12px;
+			border: none;
+			/* remove the tight “striped list” look */
+			background: rgba(255, 255, 255, 0.02);
+			border-radius: 6px;
 		}
 
 		.nlp-arrow {
 			flex-shrink: 0;
-			font-size: 0.6rem;
-			color: rgba(245, 200, 66, 0.5);
-			margin-top: 0.28rem;
-			letter-spacing: 0.05em;
+			margin-top: 2px;
+			font-size: 0.95rem;
+			/* was 0.6rem */
+			color: rgba(245, 200, 66, 0.75);
+			line-height: 1;
 		}
 
 		.nlp-row-text {
-			font-size: 0.83rem;
-			line-height: 1.7;
-			color: rgba(255, 255, 255, 0.65);
 			margin: 0;
-			word-break: break-word;
-			overflow-wrap: break-word;
+			font-size: 1rem;
+			/* was 0.83rem */
+			line-height: 1.6;
+			/* was 1.7 but with small font felt “off” */
+			color: rgba(255, 255, 255, 0.72);
 		}
 
 		.nlp-row-text strong {
-			color: rgba(255, 255, 255, 0.9);
-			font-weight: 500;
+			color: rgba(255, 255, 255, 0.92);
+			font-weight: 600;
+		}
+
+		.nlp-row.result {
+			background: rgba(245, 200, 66, 0.06);
+			border: 1px solid rgba(245, 200, 66, 0.25);
 		}
 
 		.nlp-row.result .nlp-row-text {
-			color: rgba(255, 255, 255, 0.85);
-		}
-
-		.nlp-row.result .nlp-arrow {
-			color: #f5c842;
+			color: rgba(255, 255, 255, 0.88);
 		}
 
 		.nlp-row.result .nlp-highlight {
@@ -237,11 +242,14 @@
 		}
 
 		.nlp-footer {
-			margin-top: 1.6rem;
-			font-size: 0.6rem;
-			letter-spacing: 0.18em;
+			margin-top: 18px;
+			/* was 1.6rem but everything else was cramped */
+			font-size: 0.72rem;
+			/* was 0.6rem */
+			letter-spacing: 0.10em;
+			/* was 0.18em */
 			text-transform: uppercase;
-			color: #333;
+			color: rgba(255, 255, 255, 0.28);
 			text-align: center;
 		}
 	</style>
