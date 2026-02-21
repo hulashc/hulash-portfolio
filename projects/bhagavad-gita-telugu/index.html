@@ -29,22 +29,29 @@
 	</script>
 
 	<style>
+		/* Outer slide wrapper scrolls if viewport is short */
+		.gita-slide-inner {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 40px 60px;
+			background: #0a0a0a;
+			min-height: 100%;
+			box-sizing: border-box;
+			overflow-y: auto;
+		}
+
+		/* Card grows to fit all content — no max-height */
 		#gita-card {
 			width: 100%;
 			box-sizing: border-box;
 			border: 1px solid #222;
-			padding: 1.8rem 2rem;
+			padding: 2rem 2.2rem;
 			text-align: center;
 			background: #111;
 			border-radius: 2px;
-			max-height: 360px;
-			overflow-y: auto;
-			scrollbar-width: thin;
-			scrollbar-color: #333 transparent;
 		}
-		#gita-card::-webkit-scrollbar { width: 4px; }
-		#gita-card::-webkit-scrollbar-track { background: transparent; }
-		#gita-card::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
 
 		#gita-chapter-label {
 			font-size: 0.6rem;
@@ -59,31 +66,71 @@
 			letter-spacing: 0.12em;
 			margin: 0 0 1.2rem 0;
 		}
+
+		/* Sanskrit text */
 		#gita-verse-text {
 			font-size: 1rem;
-			line-height: 1.8;
-			color: #444;
+			line-height: 1.9;
+			color: #ddd;
 			min-height: 48px;
-			font-style: italic;
 			margin: 0;
 			word-break: break-word;
 			white-space: pre-wrap;
 		}
-		#gita-translation {
-			font-size: 0.82rem;
-			line-height: 1.75;
-			color: #b0c4de;
+
+		/* Shared divider style for both translation blocks */
+		.gita-divider {
 			margin: 1rem 0 0 0;
 			padding-top: 1rem;
 			border-top: 1px solid #1e1e1e;
-			font-family: 'Noto Sans Telugu', sans-serif;
 			word-break: break-word;
 			display: none;
 		}
+
+		/* Telugu translation */
+		#gita-translation {
+			font-size: 0.88rem;
+			line-height: 1.8;
+			color: #b0c4de;
+			font-family: 'Noto Sans Telugu', sans-serif;
+		}
+
+		/* Telugu label */
+		#gita-translation::before {
+			content: 'తెలుగు అనువాదం';
+			display: block;
+			font-size: 0.55rem;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: #f5c842;
+			margin-bottom: 0.5rem;
+			font-family: sans-serif;
+		}
+
+		/* English translation */
+		#gita-english {
+			font-size: 0.85rem;
+			line-height: 1.8;
+			color: #aaa;
+			font-style: italic;
+		}
+
+		/* English label */
+		#gita-english::before {
+			content: 'English Translation';
+			display: block;
+			font-size: 0.55rem;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: #f5c842;
+			margin-bottom: 0.5rem;
+			font-style: normal;
+		}
+
 		#gita-translating {
 			font-size: 0.7rem;
 			color: #555;
-			margin: 0.6rem 0 0 0;
+			margin: 0.8rem 0 0 0;
 			font-style: italic;
 			display: none;
 		}
@@ -118,19 +165,29 @@
 
 				<!-- SLIDE 1: Verse Generator -->
 				<div class="large">
-					<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 60px;background:#0a0a0a;height:100%;min-height:480px;box-sizing:border-box;">
+					<div class="gita-slide-inner">
 
 						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin:0 0 1.8rem 0;">భగవద్గీత &middot; Verse Generator</p>
 
-						<div id="gita-interactive" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:640px;">
+						<div id="gita-interactive" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:680px;">
 
-							<!-- Scrollable verse card -->
+							<!-- Verse card — grows to fit all content -->
 							<div id="gita-card">
 								<p id="gita-chapter-label"></p>
 								<p id="gita-verse-number">&mdash;</p>
+
+								<!-- Sanskrit -->
 								<p id="gita-verse-text">లోడ్ అవుతోంది...</p>
-								<p id="gita-translation"></p>
+
+								<!-- Telugu translation -->
+								<p id="gita-translation" class="gita-divider"></p>
+
+								<!-- Telugu translating indicator -->
 								<p id="gita-translating">తెలుగులోకి అనువదిస్తోంది...</p>
+
+								<!-- English translation -->
+								<p id="gita-english" class="gita-divider"></p>
+
 								<p id="gita-error"></p>
 							</div>
 
@@ -262,22 +319,30 @@
 		async function gitaDisplay(data, ch, vs) {
 			document.getElementById('gita-chapter-label').textContent = 'అధ్యాయం ' + ch;
 			document.getElementById('gita-verse-number').textContent = 'శ్లోకం ' + vs;
-			const el = document.getElementById('gita-verse-text');
+
 			const slokText = data.slok || '';
-			el.textContent = slokText;
-			el.style.color = '#ddd';
+			const verseEl = document.getElementById('gita-verse-text');
+			verseEl.textContent = slokText;
 
 			const tel = document.getElementById('gita-translation');
+			const eng = document.getElementById('gita-english');
 			const transIndicator = document.getElementById('gita-translating');
 
 			tel.textContent = '';
 			tel.style.display = 'none';
+			eng.textContent = '';
+			eng.style.display = 'none';
 			transIndicator.style.display = 'block';
 			document.getElementById('gita-error').textContent = '';
 
-			// Scroll card back to top on new verse
-			document.getElementById('gita-card').scrollTop = 0;
+			// English translation — always show directly from API data
+			const enTr = (data.siva && data.siva.et) ? data.siva.et
+				: (data.purohit && data.purohit.et) ? data.purohit.et
+				: (data.tej && data.tej.et) ? data.tej.et
+				: (data.ram && data.ram.et) ? data.ram.et
+				: '';
 
+			// Telugu translation via MyMemory API
 			if (slokText) {
 				const cacheKey = ch + '_' + vs;
 				const teluguText = await translateToTelugu(slokText, cacheKey);
@@ -285,16 +350,10 @@
 				if (teluguText) {
 					tel.textContent = '\u201c' + teluguText + '\u201d';
 					tel.style.display = 'block';
-				} else {
-					const enTr = (data.siva && data.siva.et) ? data.siva.et
-						: (data.tej && data.tej.et) ? data.tej.et
-						: (data.purohit && data.purohit.et) ? data.purohit.et
-						: (data.ram && data.ram.et) ? data.ram.et
-						: '';
-					if (enTr) {
-						tel.textContent = '\u201c' + enTr + '\u201d';
-						tel.style.display = 'block';
-					}
+				}
+				if (enTr) {
+					eng.textContent = '\u201c' + enTr + '\u201d';
+					eng.style.display = 'block';
 				}
 			} else {
 				transIndicator.style.display = 'none';
@@ -303,19 +362,20 @@
 
 		function gitaSetLoading() {
 			document.getElementById('gita-verse-text').textContent = 'లోడ్ అవుతోంది...';
-			document.getElementById('gita-verse-text').style.color = '#444';
 			document.getElementById('gita-verse-number').textContent = '\u2014';
 			document.getElementById('gita-chapter-label').textContent = '';
 			document.getElementById('gita-translation').textContent = '';
 			document.getElementById('gita-translation').style.display = 'none';
+			document.getElementById('gita-english').textContent = '';
+			document.getElementById('gita-english').style.display = 'none';
 			document.getElementById('gita-translating').style.display = 'none';
 			document.getElementById('gita-error').textContent = '';
-			document.getElementById('gita-card').scrollTop = 0;
 		}
 
 		function gitaShowError(msg) {
 			document.getElementById('gita-verse-text').textContent = '';
 			document.getElementById('gita-translation').style.display = 'none';
+			document.getElementById('gita-english').style.display = 'none';
 			document.getElementById('gita-translating').style.display = 'none';
 			document.getElementById('gita-error').textContent = msg;
 		}
@@ -326,18 +386,12 @@
 		}
 
 		// Block pointer/touch events on the container from bubbling to the slide listener
-		// Also block scroll inside the card from triggering slide change
 		(function () {
 			var el = document.getElementById('gita-interactive');
 			if (!el) return;
 			['mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(function(evt) {
 				el.addEventListener(evt, function(e) { e.stopPropagation(); }, true);
 			});
-			var card = document.getElementById('gita-card');
-			if (card) {
-				card.addEventListener('wheel', function(e) { e.stopPropagation(); }, { passive: true });
-				card.addEventListener('touchmove', function(e) { e.stopPropagation(); }, { passive: true });
-			}
 		})();
 
 		gitaFetchRandom();
