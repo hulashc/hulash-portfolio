@@ -28,6 +28,72 @@
 		document.querySelector(':root').style.setProperty('--mono', '#000000');
 	</script>
 
+	<style>
+		#gita-card {
+			width: 100%;
+			box-sizing: border-box;
+			border: 1px solid #222;
+			padding: 1.8rem 2rem;
+			text-align: center;
+			background: #111;
+			border-radius: 2px;
+			max-height: 360px;
+			overflow-y: auto;
+			scrollbar-width: thin;
+			scrollbar-color: #333 transparent;
+		}
+		#gita-card::-webkit-scrollbar { width: 4px; }
+		#gita-card::-webkit-scrollbar-track { background: transparent; }
+		#gita-card::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+		#gita-chapter-label {
+			font-size: 0.6rem;
+			color: #555;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+			margin: 0 0 0.2rem 0;
+		}
+		#gita-verse-number {
+			font-size: 0.65rem;
+			color: #555;
+			letter-spacing: 0.12em;
+			margin: 0 0 1.2rem 0;
+		}
+		#gita-verse-text {
+			font-size: 1rem;
+			line-height: 1.8;
+			color: #444;
+			min-height: 48px;
+			font-style: italic;
+			margin: 0;
+			word-break: break-word;
+			white-space: pre-wrap;
+		}
+		#gita-translation {
+			font-size: 0.82rem;
+			line-height: 1.75;
+			color: #b0c4de;
+			margin: 1rem 0 0 0;
+			padding-top: 1rem;
+			border-top: 1px solid #1e1e1e;
+			font-family: 'Noto Sans Telugu', sans-serif;
+			word-break: break-word;
+			display: none;
+		}
+		#gita-translating {
+			font-size: 0.7rem;
+			color: #555;
+			margin: 0.6rem 0 0 0;
+			font-style: italic;
+			display: none;
+		}
+		#gita-error {
+			color: #ff6b6b;
+			font-size: 0.8rem;
+			margin: 0.4rem 0 0 0;
+		}
+	</style>
+
 </head>
 
 <body class="project init">
@@ -52,45 +118,47 @@
 
 				<!-- SLIDE 1: Verse Generator -->
 				<div class="large">
-					<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px;background:#0a0a0a;height:100%;min-height:480px;">
+					<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 60px;background:#0a0a0a;height:100%;min-height:480px;box-sizing:border-box;">
 
-						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">భగవద్గీత &middot; Verse Generator</p>
+						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin:0 0 1.8rem 0;">భగవద్గీత &middot; Verse Generator</p>
 
-						<!-- All interaction wrapped — stops clicks bubbling to slide listener -->
-						<div id="gita-interactive" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:680px;">
+						<div id="gita-interactive" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:640px;">
 
-							<div style="width:100%;border:1px solid #222;padding:2.5rem;text-align:center;background:#111;border-radius:2px;">
-								<p id="gita-chapter-label" style="font-size:0.6rem;color:#555;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.3rem;"></p>
-								<p id="gita-verse-number" style="font-size:0.65rem;color:#555;letter-spacing:0.12em;margin-bottom:1.6rem;">&mdash;</p>
-								<p id="gita-verse-text" style="font-size:1.2rem;line-height:2;color:#444;min-height:80px;font-style:italic;">లోడ్ అవుతోంది...</p>
-								<p id="gita-translation" style="font-size:0.9rem;line-height:1.9;color:#b0c4de;margin-top:1.2rem;font-style:normal;border-top:1px solid #1e1e1e;padding-top:1rem;font-family:'Noto Sans Telugu',sans-serif;"></p>
-								<p id="gita-translating" style="font-size:0.72rem;color:#555;margin-top:0.4rem;font-style:italic;display:none;">తెలుగులోకి అనువదిస్తోంది...</p>
-								<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
+							<!-- Scrollable verse card -->
+							<div id="gita-card">
+								<p id="gita-chapter-label"></p>
+								<p id="gita-verse-number">&mdash;</p>
+								<p id="gita-verse-text">లోడ్ అవుతోంది...</p>
+								<p id="gita-translation"></p>
+								<p id="gita-translating">తెలుగులోకి అనువదిస్తోంది...</p>
+								<p id="gita-error"></p>
 							</div>
 
-							<div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;">
+							<!-- Buttons -->
+							<div style="display:flex;gap:0.8rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;">
 								<button id="btn-random"
-									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.5rem 1.3rem;font-size:0.72rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
 									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';"
 									onclick="event.stopPropagation();gitaFetchRandom();">Random Verse</button>
 
 								<button id="btn-goto"
-									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.5rem 1.3rem;font-size:0.72rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
 									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';"
 									onclick="event.stopPropagation();gitaToggleInput();">Go to Verse</button>
 							</div>
 
-							<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:1.2rem;justify-content:center;flex-wrap:wrap;">
+							<!-- Chapter / Verse inputs -->
+							<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:0.9rem;justify-content:center;flex-wrap:wrap;">
 								<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
-									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;"
+									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.4rem 0.6rem;width:66px;font-size:0.78rem;border-radius:2px;text-align:center;box-sizing:border-box;"
 									onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
 								<input type="number" id="gita-vs" placeholder="Vs" min="1"
-									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;"
+									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.4rem 0.6rem;width:66px;font-size:0.78rem;border-radius:2px;text-align:center;box-sizing:border-box;"
 									onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
 								<button id="btn-go"
-									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.4rem 1rem;font-size:0.72rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onclick="event.stopPropagation();gitaFetchSpecific();">Go</button>
 							</div>
 
@@ -138,8 +206,6 @@
 	<script>
 		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
 		const GITA_BASE = 'https://vedicscriptures.github.io';
-
-		// Telugu translation cache: key = "ch_vs", value = translated string
 		const teluguCache = {};
 
 		function gitaRandInt(min, max) {
@@ -174,7 +240,6 @@
 			}
 		}
 
-		// Translate Sanskrit slok text to Telugu using MyMemory API (free, no key required)
 		async function translateToTelugu(sanskritText, cacheKey) {
 			if (teluguCache[cacheKey]) return teluguCache[cacheKey];
 			try {
@@ -210,6 +275,9 @@
 			transIndicator.style.display = 'block';
 			document.getElementById('gita-error').textContent = '';
 
+			// Scroll card back to top on new verse
+			document.getElementById('gita-card').scrollTop = 0;
+
 			if (slokText) {
 				const cacheKey = ch + '_' + vs;
 				const teluguText = await translateToTelugu(slokText, cacheKey);
@@ -218,7 +286,6 @@
 					tel.textContent = '\u201c' + teluguText + '\u201d';
 					tel.style.display = 'block';
 				} else {
-					// Fallback to English if Telugu translation fails
 					const enTr = (data.siva && data.siva.et) ? data.siva.et
 						: (data.tej && data.tej.et) ? data.tej.et
 						: (data.purohit && data.purohit.et) ? data.purohit.et
@@ -243,6 +310,7 @@
 			document.getElementById('gita-translation').style.display = 'none';
 			document.getElementById('gita-translating').style.display = 'none';
 			document.getElementById('gita-error').textContent = '';
+			document.getElementById('gita-card').scrollTop = 0;
 		}
 
 		function gitaShowError(msg) {
@@ -257,13 +325,19 @@
 			box.style.display = box.style.display === 'none' ? 'flex' : 'none';
 		}
 
-		// Block all pointer/touch events on the container from bubbling to the slide listener
+		// Block pointer/touch events on the container from bubbling to the slide listener
+		// Also block scroll inside the card from triggering slide change
 		(function () {
 			var el = document.getElementById('gita-interactive');
 			if (!el) return;
 			['mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(function(evt) {
 				el.addEventListener(evt, function(e) { e.stopPropagation(); }, true);
 			});
+			var card = document.getElementById('gita-card');
+			if (card) {
+				card.addEventListener('wheel', function(e) { e.stopPropagation(); }, { passive: true });
+				card.addEventListener('touchmove', function(e) { e.stopPropagation(); }, { passive: true });
+			}
 		})();
 
 		gitaFetchRandom();
