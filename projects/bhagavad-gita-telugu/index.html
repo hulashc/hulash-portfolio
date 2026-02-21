@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-	<title>Hulash Chand Donempudi &raquo; LeetJourney Obsidian Notes</title>
+	<title>Hulash Chand Donempudi &raquo; Bhagavad Gita Telugu</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description"
@@ -33,9 +33,9 @@
 			]
 		];
 
-		document.querySelector(':root').style.setProperty('--background', '#cccccc');
+		document.querySelector(':root').style.setProperty('--background', '#000000');
 
-		document.querySelector(':root').style.setProperty('--mono', '#cccccc');
+		document.querySelector(':root').style.setProperty('--mono', '#000000');
 	</script>
 
 
@@ -84,63 +84,196 @@
 			<div id="project-slides">
 
 
+				<!-- SLIDE 1: Verse Generator (API) -->
 				<div class="large">
+					<div style="
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						padding: 60px 80px;
+						background: #0a0a0a;
+						height: 100%;
+						min-height: 480px;
+					">
 
-					<div>
+						<p style="
+							font-size: 0.65rem;
+							letter-spacing: 0.25em;
+							text-transform: uppercase;
+							color: #f5c842;
+							margin-bottom: 2.5rem;
+						">Bhagavad Gita · Telugu Verses</p>
 
-						<img src="../../content/uploads/2025/08/CMS_OS_VINYL_FRONT-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/08/CMS_OS_VINYL_FRONT-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/08/CMS_OS_VINYL_FRONT.png 2400w"
-							sizes="100vw" alt="">
+						<div style="
+							max-width: 640px;
+							width: 100%;
+							border: 1px solid #222;
+							padding: 3rem 2.5rem;
+							text-align: center;
+							background: #111;
+							border-radius: 2px;
+						">
+							<p id="gita-verse-number" style="
+								font-size: 0.7rem;
+								color: #555;
+								letter-spacing: 0.12em;
+								margin-bottom: 1.5rem;
+								text-transform: uppercase;
+							">—</p>
+
+							<p id="gita-verse-text" style="
+								font-size: 1.3rem;
+								line-height: 2;
+								color: #ddd;
+								min-height: 80px;
+								font-style: italic;
+							">Loading verse...</p>
+
+							<p id="gita-error" style="color: #ff6b6b; font-size: 0.8rem; margin-top: 0.5rem;"></p>
+						</div>
+
+						<div style="
+							display: flex;
+							gap: 1rem;
+							margin-top: 2rem;
+							flex-wrap: wrap;
+							justify-content: center;
+						">
+							<button onclick="gitaFetchRandom()" style="
+								background: transparent;
+								border: 1px solid #333;
+								color: #ccc;
+								padding: 0.55rem 1.4rem;
+								font-size: 0.75rem;
+								letter-spacing: 0.1em;
+								cursor: pointer;
+								border-radius: 2px;
+								transition: border-color 0.2s, color 0.2s;
+							" onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
+							   onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">
+								Random Verse
+							</button>
+
+							<button onclick="gitaToggleInput()" style="
+								background: transparent;
+								border: 1px solid #333;
+								color: #ccc;
+								padding: 0.55rem 1.4rem;
+								font-size: 0.75rem;
+								letter-spacing: 0.1em;
+								cursor: pointer;
+								border-radius: 2px;
+								transition: border-color 0.2s, color 0.2s;
+							" onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
+							   onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">
+								Go to Verse
+							</button>
+						</div>
+
+						<div id="gita-chapter-input" style="display:none; gap:0.5rem; margin-top:1.2rem; justify-content:center; flex-wrap:wrap;">
+							<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18" style="
+								background: #0a0a0a;
+								border: 1px solid #333;
+								color: #ccc;
+								padding: 0.45rem 0.7rem;
+								width: 72px;
+								font-size: 0.8rem;
+								border-radius: 2px;
+								text-align: center;
+							">
+							<input type="number" id="gita-vs" placeholder="Vs" min="1" style="
+								background: #0a0a0a;
+								border: 1px solid #333;
+								color: #ccc;
+								padding: 0.45rem 0.7rem;
+								width: 72px;
+								font-size: 0.8rem;
+								border-radius: 2px;
+								text-align: center;
+							">
+							<button onclick="gitaFetchSpecific()" style="
+								background: transparent;
+								border: 1px solid #333;
+								color: #ccc;
+								padding: 0.45rem 1rem;
+								font-size: 0.75rem;
+								letter-spacing: 0.1em;
+								cursor: pointer;
+								border-radius: 2px;
+							">Go</button>
+						</div>
+
 					</div>
-
 				</div>
 
 
+				<!-- SLIDE 2: Importance of Bhagavad Gita -->
 				<div class="large">
+					<div style="
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: flex-start;
+						padding: 60px 80px;
+						background: linear-gradient(135deg, #0a0a0a 0%, #141008 100%);
+						height: 100%;
+						min-height: 480px;
+					">
+						<h3 style="
+							font-size: 26px;
+							font-weight: 300;
+							letter-spacing: 0.15em;
+							text-transform: uppercase;
+							color: #fff;
+							margin-bottom: 32px;
+							border-left: 3px solid #f5c842;
+							padding-left: 20px;
+						">Why the Bhagavad Gita Endures</h3>
 
-					<div>
+						<ul style="
+							list-style: none;
+							padding: 0;
+							margin: 0;
+							font-size: 15px;
+							line-height: 1.9;
+							color: rgba(255,255,255,0.75);
+							max-width: 700px;
+						">
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
+								A <strong style="color:#f5c842">5,000-year-old dialogue</strong> between Arjuna and Krishna — distilled into 700 verses on duty, action, and the self.
+							</li>
 
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-FRONT-BACK-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-FRONT-BACK-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-FRONT-BACK-1600x1600.png 2400w"
-							sizes="100vw" alt="">
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
+								The concept of <strong style="color:#f5c842">Nishkama Karma</strong> — act without attachment to outcomes — has influenced thinkers from Thoreau to Gandhi.
+							</li>
+
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
+								It frames the battlefield as a metaphor for <strong style="color:#f5c842">inner conflict</strong> — the war between duty and desire every person faces.
+							</li>
+
+							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
+								The Telugu tradition carries its own <strong style="color:#f5c842">poetic lineage</strong> — scholars like Tikkana translated it into verse that resonates with South Indian philosophy.
+							</li>
+
+							<li style="margin-bottom: 0; padding-left: 24px; position: relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
+								This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> — making ancient text accessible and programmable for the modern web.
+							</li>
+						</ul>
+
+						<p style="
+							margin-top: 2.5rem;
+							font-size: 0.7rem;
+							letter-spacing: 0.15em;
+							text-transform: uppercase;
+							color: #444;
+						">Source · Bhagavad Gita Telugu API · gita-api.vercel.app</p>
 					</div>
-
-				</div>
-
-
-				<div class="large">
-
-					<div>
-
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Vinyl-Suite-1-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Vinyl-Suite-1-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Vinyl-Suite-1-1600x1600.png 2400w"
-							sizes="100vw" alt="">
-					</div>
-
-				</div>
-
-
-				<div class="large">
-
-					<div>
-
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Inner-A-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Inner-A-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_Inner-A-1600x1600.png 2400w"
-							sizes="100vw" alt="">
-					</div>
-
-				</div>
-
-
-				<div class="large">
-
-					<div>
-
-						<img src="../../wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-LABELS-640x640.png"
-							srcset="https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-LABELS-1280x1280.png 1280w, https://www.benjamintousley.com/wp-content/uploads/2025/09/Benjamin-Tousley_Cecile-Salvant_Oh-Snap_COMP_VINYL-LABELS-1600x1600.png 2400w"
-							sizes="100vw" alt="">
-					</div>
-
 				</div>
 
 
@@ -149,22 +282,22 @@
 			<div id="project-info">
 
 				<h2>
-					<span>LeetJourney</span>
-					<span>Obsidian Notes</span>
+					<span>Bhagavad Gita</span>
+					<span>Telugu Verses</span>
 				</h2>
 
 
 				<div id="project-info-details" class="more">
 
-					<a href="#"><span>Leet code stuff</span></a>
+					<a href="https://gita-api.vercel.app" target="_blank" rel="noopener"><span>gita-api.vercel.app</span></a>
 
-					<p>Just my leetcode practice to perfection, if there is a perfection in there haha!</p>
+					<p>Live Telugu verses from the Bhagavad Gita, fetched directly from an open API. Navigate by chapter and verse or let chance guide you.</p>
 
 				</div>
 
 
 				<div id="project-info-counter">
-					<span>1</span><span>/5</span>
+					<span>1</span><span>/2</span>
 					<span class="next"></span>
 				</div>
 
@@ -179,6 +312,64 @@
 	<footer>
 
 	</footer>
+
+	<script>
+		const GITA_BASE = 'https://gita-api.vercel.app';
+
+		async function gitaFetchRandom() {
+			gitaSetLoading();
+			try {
+				const res = await fetch(GITA_BASE + '/random-verse');
+				if (!res.ok) throw new Error('fetch failed');
+				const data = await res.json();
+				gitaDisplay(data);
+			} catch (e) {
+				gitaShowError('Could not load verse. Please try again.');
+			}
+		}
+
+		async function gitaFetchSpecific() {
+			const ch = document.getElementById('gita-ch').value;
+			const vs = document.getElementById('gita-vs').value;
+			if (!ch || !vs) { gitaShowError('Enter both chapter and verse.'); return; }
+			gitaSetLoading();
+			try {
+				const res = await fetch(GITA_BASE + '/verse/' + ch + '/' + vs);
+				if (!res.ok) throw new Error('not found');
+				const data = await res.json();
+				gitaDisplay(data);
+			} catch (e) {
+				gitaShowError('Verse ' + ch + ':' + vs + ' not found.');
+			}
+		}
+
+		function gitaDisplay(data) {
+			document.getElementById('gita-verse-number').textContent = 'Verse ' + data.verse_number;
+			const el = document.getElementById('gita-verse-text');
+			el.textContent = data.text;
+			el.style.color = '#ddd';
+			document.getElementById('gita-error').textContent = '';
+		}
+
+		function gitaSetLoading() {
+			document.getElementById('gita-verse-text').textContent = 'Loading...';
+			document.getElementById('gita-verse-text').style.color = '#444';
+			document.getElementById('gita-verse-number').textContent = '—';
+			document.getElementById('gita-error').textContent = '';
+		}
+
+		function gitaShowError(msg) {
+			document.getElementById('gita-verse-text').textContent = '';
+			document.getElementById('gita-error').textContent = msg;
+		}
+
+		function gitaToggleInput() {
+			const box = document.getElementById('gita-chapter-input');
+			box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+		}
+
+		gitaFetchRandom();
+	</script>
 
 </body>
 
