@@ -65,32 +65,51 @@
 					">
 						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">భగవద్గీత &middot; Telugu Verse Generator</p>
 
-						<div style="max-width:660px;width:100%;border:1px solid #222;padding:2.5rem 2.5rem;text-align:center;background:#111;border-radius:2px;">
-							<p id="gita-chapter-label" style="font-size:0.65rem;color:#555;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem;"></p>
-							<p id="gita-verse-number" style="font-size:0.7rem;color:#666;letter-spacing:0.12em;margin-bottom:1.8rem;">&mdash;</p>
-							<p id="gita-verse-text" style="font-size:1.25rem;line-height:2.1;color:#ddd;min-height:80px;">లోడ్ అవుతోంది...</p>
-							<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
-						</div>
+						<!-- stop ALL clicks/mousedowns here from bubbling to the slide listener -->
+						<div id="gita-interactive"
+							onclick="event.stopPropagation();"
+							onmousedown="event.stopPropagation();"
+							ontouchstart="event.stopPropagation();"
+							style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:660px;">
 
-						<div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;">
-							<button onclick="gitaFetchRandom()"
-								style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
-								onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
-								onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Random Verse</button>
+							<div style="width:100%;border:1px solid #222;padding:2.5rem 2.5rem;text-align:center;background:#111;border-radius:2px;">
+								<p id="gita-chapter-label" style="font-size:0.65rem;color:#555;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem;"></p>
+								<p id="gita-verse-number" style="font-size:0.7rem;color:#666;letter-spacing:0.12em;margin-bottom:1.8rem;">&mdash;</p>
+								<p id="gita-verse-text" style="font-size:1.25rem;line-height:2.1;color:#444;min-height:80px;">లోడ్ అవుతోంది...</p>
+								<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
+							</div>
 
-							<button onclick="gitaToggleInput()"
-								style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
-								onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
-								onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Go to Verse</button>
-						</div>
+							<div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;">
+								<button
+									onclick="event.stopPropagation(); gitaFetchRandom();"
+									onmousedown="event.stopPropagation();"
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
+									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Random Verse</button>
 
-						<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:1.2rem;justify-content:center;flex-wrap:wrap;">
-							<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
-								style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
-							<input type="number" id="gita-vs" placeholder="Vs" min="1"
-								style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
-							<button onclick="gitaFetchSpecific()"
-								style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;">Go</button>
+								<button
+									onclick="event.stopPropagation(); gitaToggleInput();"
+									onmousedown="event.stopPropagation();"
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
+									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Go to Verse</button>
+							</div>
+
+							<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:1.2rem;justify-content:center;flex-wrap:wrap;">
+								<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
+									onclick="event.stopPropagation();"
+									onmousedown="event.stopPropagation();"
+									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
+								<input type="number" id="gita-vs" placeholder="Vs" min="1"
+									onclick="event.stopPropagation();"
+									onmousedown="event.stopPropagation();"
+									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
+								<button
+									onclick="event.stopPropagation(); gitaFetchSpecific();"
+									onmousedown="event.stopPropagation();"
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;">Go</button>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -133,7 +152,7 @@
 							</li>
 						</ul>
 
-						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; gita-api.vercel.app &middot; Telugu (te) language</p>
+						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; gita-api.vercel.app &middot; Telugu (te)</p>
 					</div>
 				</div>
 
@@ -163,9 +182,13 @@
 	<footer></footer>
 
 	<script>
-		// Verse counts per chapter (18 chapters)
 		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
-		const GITA_BASE = 'https://gita-api.vercel.app/api/te';
+
+		// Use allorigins CORS proxy to bypass CORS block on gita-api.vercel.app
+		function gitaProxyUrl(path) {
+			const target = encodeURIComponent('https://gita-api.vercel.app' + path);
+			return 'https://api.allorigins.win/get?url=' + target;
+		}
 
 		function gitaRandInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -188,21 +211,22 @@
 
 		async function gitaLoad(ch, vs) {
 			try {
-				const res = await fetch(GITA_BASE + '/' + ch + '/' + vs);
-				if (!res.ok) throw new Error('not found');
-				const data = await res.json();
+				const res = await fetch(gitaProxyUrl('/verse/' + ch + '/' + vs));
+				if (!res.ok) throw new Error('fetch failed');
+				const wrapper = await res.json();
+				const data = JSON.parse(wrapper.contents);
 				gitaDisplay(data, ch, vs);
 			} catch (e) {
-				gitaShowError('Verse ' + ch + ':' + vs + ' not found. Try another.');
+				gitaShowError('Could not load verse. Please try again.');
 			}
 		}
 
 		function gitaDisplay(data, ch, vs) {
 			document.getElementById('gita-chapter-label').textContent = 'అధ్యాయం ' + ch;
 			document.getElementById('gita-verse-number').textContent = 'శ్లోకం ' + vs;
-			const text = data.text || data.verse || data.slok || JSON.stringify(data);
+			const text = data.text || data.verse || data.slok || '';
 			const el = document.getElementById('gita-verse-text');
-			el.textContent = text;
+			el.textContent = text || JSON.stringify(data);
 			el.style.color = '#ddd';
 			document.getElementById('gita-error').textContent = '';
 		}
@@ -224,6 +248,16 @@
 			const box = document.getElementById('gita-chapter-input');
 			box.style.display = box.style.display === 'none' ? 'flex' : 'none';
 		}
+
+		// Block all interaction events on the interactive area from reaching the slide listener
+		document.addEventListener('DOMContentLoaded', function () {
+			var el = document.getElementById('gita-interactive');
+			if (el) {
+				['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(function(evt) {
+					el.addEventListener(evt, function(e) { e.stopPropagation(); });
+				});
+			}
+		});
 
 		gitaFetchRandom();
 	</script>
