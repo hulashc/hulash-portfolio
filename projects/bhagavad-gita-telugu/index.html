@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-	<title>Hulash Chand Donempudi &raquo; Bhagavad Gita</title>
+	<title>Hulash Chand Donempudi &raquo; Bhagavad Gita Telugu</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description"
@@ -51,7 +51,7 @@
 			<div id="project-slides">
 
 
-				<!-- SLIDE 1: Verse Generator -->
+				<!-- SLIDE 1: Telugu Verse Generator -->
 				<div class="large">
 					<div style="
 						display:flex;
@@ -63,13 +63,12 @@
 						height:100%;
 						min-height:480px;
 					">
-						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">Bhagavad Gita &middot; Verse Generator</p>
+						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">భగవద్గీత &middot; Telugu Verse Generator</p>
 
-						<div style="max-width:640px;width:100%;border:1px solid #222;padding:3rem 2.5rem;text-align:center;background:#111;border-radius:2px;">
-							<p id="gita-chapter-label" style="font-size:0.65rem;color:#555;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;"></p>
-							<p id="gita-verse-number" style="font-size:0.7rem;color:#666;letter-spacing:0.12em;margin-bottom:1.5rem;text-transform:uppercase;">&mdash;</p>
-							<p id="gita-verse-text" style="font-size:1.1rem;line-height:2;color:#ddd;min-height:80px;font-style:italic;">Loading verse...</p>
-							<p id="gita-translation" style="font-size:0.85rem;line-height:1.7;color:#888;margin-top:1rem;font-style:normal;"></p>
+						<div style="max-width:660px;width:100%;border:1px solid #222;padding:2.5rem 2.5rem;text-align:center;background:#111;border-radius:2px;">
+							<p id="gita-chapter-label" style="font-size:0.65rem;color:#555;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem;"></p>
+							<p id="gita-verse-number" style="font-size:0.7rem;color:#666;letter-spacing:0.12em;margin-bottom:1.8rem;">&mdash;</p>
+							<p id="gita-verse-text" style="font-size:1.25rem;line-height:2.1;color:#ddd;min-height:80px;">లోడ్ అవుతోంది...</p>
 							<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
 						</div>
 
@@ -130,11 +129,11 @@
 							</li>
 							<li style="margin-bottom:0;padding-left:24px;position:relative;">
 								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
-								This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> &mdash; making ancient text accessible and programmable for the modern web.
+								This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> &mdash; making ancient Telugu text accessible and programmable for the modern web.
 							</li>
 						</ul>
 
-						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; Vedic Scriptures Open API &middot; vedicscriptures.github.io</p>
+						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; gita-api.vercel.app &middot; Telugu (te) language</p>
 					</div>
 				</div>
 
@@ -144,12 +143,12 @@
 			<div id="project-info">
 				<h2>
 					<span>Bhagavad Gita</span>
-					<span>Verse Generator</span>
+					<span>Telugu Verses</span>
 				</h2>
 
 				<div id="project-info-details" class="more">
-					<a href="https://vedicscriptures.github.io" target="_blank" rel="noopener"><span>vedicscriptures.github.io</span></a>
-					<p>Live verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and verse, or let chance guide you.</p>
+					<a href="https://gita-api.vercel.app" target="_blank" rel="noopener"><span>gita-api.vercel.app</span></a>
+					<p>Live Telugu verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and verse, or let chance guide you.</p>
 				</div>
 
 				<div id="project-info-counter">
@@ -164,9 +163,9 @@
 	<footer></footer>
 
 	<script>
-		// Chapter verse counts for generating a valid random verse
+		// Verse counts per chapter (18 chapters)
 		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
-		const GITA_BASE = 'https://vedicscriptures.github.io';
+		const GITA_BASE = 'https://gita-api.vercel.app/api/te';
 
 		function gitaRandInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -189,7 +188,7 @@
 
 		async function gitaLoad(ch, vs) {
 			try {
-				const res = await fetch(GITA_BASE + '/slok/' + ch + '/' + vs);
+				const res = await fetch(GITA_BASE + '/' + ch + '/' + vs);
 				if (!res.ok) throw new Error('not found');
 				const data = await res.json();
 				gitaDisplay(data, ch, vs);
@@ -199,30 +198,25 @@
 		}
 
 		function gitaDisplay(data, ch, vs) {
-			document.getElementById('gita-chapter-label').textContent = 'Chapter ' + ch;
-			document.getElementById('gita-verse-number').textContent = 'Verse ' + vs;
-			document.getElementById('gita-verse-text').textContent = data.slok || '';
-			document.getElementById('gita-verse-text').style.color = '#ddd';
-			// Show English translation if available (Siva commentary)
-			const translation = data.siva && data.siva.et ? data.siva.et
-				: data.tej && data.tej.et ? data.tej.et
-				: '';
-			document.getElementById('gita-translation').textContent = translation ? '\u201c' + translation + '\u201d' : '';
+			document.getElementById('gita-chapter-label').textContent = 'అధ్యాయం ' + ch;
+			document.getElementById('gita-verse-number').textContent = 'శ్లోకం ' + vs;
+			const text = data.text || data.verse || data.slok || JSON.stringify(data);
+			const el = document.getElementById('gita-verse-text');
+			el.textContent = text;
+			el.style.color = '#ddd';
 			document.getElementById('gita-error').textContent = '';
 		}
 
 		function gitaSetLoading() {
-			document.getElementById('gita-verse-text').textContent = 'Loading...';
+			document.getElementById('gita-verse-text').textContent = 'లోడ్ అవుతోంది...';
 			document.getElementById('gita-verse-text').style.color = '#444';
 			document.getElementById('gita-verse-number').textContent = '\u2014';
 			document.getElementById('gita-chapter-label').textContent = '';
-			document.getElementById('gita-translation').textContent = '';
 			document.getElementById('gita-error').textContent = '';
 		}
 
 		function gitaShowError(msg) {
 			document.getElementById('gita-verse-text').textContent = '';
-			document.getElementById('gita-translation').textContent = '';
 			document.getElementById('gita-error').textContent = msg;
 		}
 
