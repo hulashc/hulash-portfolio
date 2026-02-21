@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-	<title>Hulash Chand Donempudi &raquo; Bhagavad Gita Telugu</title>
+	<title>Hulash Chand Donempudi &raquo; Bhagavad Gita</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description"
@@ -13,69 +13,36 @@
 		content="HULASH is a data engineer designing scalable data systems across cloud, analytics, and automation.">
 
 	<link rel='stylesheet' id='TEMPLATE-css' href='/styles.css' type='text/css' media='all' />
-	<script type="text/javascript" src="/jquery-3.6.0.mind4d0.js" id="jquery-3.6.0.min-js">
-	</script>
+	<script type="text/javascript" src="/jquery-3.6.0.mind4d0.js" id="jquery-3.6.0.min-js"></script>
 	<script type="text/javascript" src="/jquery.bez.mind4d0.js" id="jquery.bez-js"></script>
-	<script type="text/javascript" src="/jquery.easing.1.3d4d0.js" id="jquery.easing.1.3-js">
-	</script>
-	<script type="text/javascript" id="app-js-extra">
-
-	</script>
+	<script type="text/javascript" src="/jquery.easing.1.3d4d0.js" id="jquery.easing.1.3-js"></script>
+	<script type="text/javascript" id="app-js-extra"></script>
 	<script type="text/javascript" src="/app.min8a54.js" id="app-js"></script>
 
 	<script type="text/javascript">
 		projects = [
-			[2270, "20251121", "Jessica Williams", "Blue Abstraction", "#\/projects\/jessica-williams-blue-abstraction\/",
-				"Jessica Williams Blue Abstraction"
-			],
-			[2301, "20251113", "Mark Armijo McKnight", "Posthume", "#\/projects\/mark-mcknight-posthume\/",
-				"Mark McKnight Posthume"
-			]
+			[2270, "20251121", "Jessica Williams", "Blue Abstraction", "#\/projects\/jessica-williams-blue-abstraction\/", "Jessica Williams Blue Abstraction"],
+			[2301, "20251113", "Mark Armijo McKnight", "Posthume", "#\/projects\/mark-mcknight-posthume\/", "Mark McKnight Posthume"]
 		];
-
 		document.querySelector(':root').style.setProperty('--background', '#000000');
-
 		document.querySelector(':root').style.setProperty('--mono', '#000000');
 	</script>
-
-
 
 </head>
 
 <body class="project init">
 
 	<header>
-
 		<a href="../../">Hulash Chand Donempudi</a>
-
 		<ul class="index js-index">
-
-			<li>
-				<a href="#">Grid</a>
-				<a href="#">Index</a>
-			</li>
-
-			<li>
-				<a href="#">A-Z</a>
-				<a href="#">2025-2006</a>
-			</li>
-
+			<li><a href="#">Grid</a><a href="#">Index</a></li>
+			<li><a href="#">A-Z</a><a href="#">2025-2006</a></li>
 		</ul>
-
 		<ul class="nav">
-
-			<li>
-				<a href="../../info/">Info</a>
-			</li>
-
-			<li>
-				<a href="../../">Close</a>
-			</li>
-
+			<li><a href="../../info/">Info</a></li>
+			<li><a href="../../">Close</a></li>
 		</ul>
-
 		<a href="#" class="color js-theme"></a>
-
 	</header>
 
 	<main>
@@ -84,126 +51,48 @@
 			<div id="project-slides">
 
 
-				<!-- SLIDE 1: Verse Generator (API) -->
+				<!-- SLIDE 1: Verse Generator -->
 				<div class="large">
 					<div style="
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						align-items: center;
-						padding: 60px 80px;
-						background: #0a0a0a;
-						height: 100%;
-						min-height: 480px;
+						display:flex;
+						flex-direction:column;
+						justify-content:center;
+						align-items:center;
+						padding:60px 80px;
+						background:#0a0a0a;
+						height:100%;
+						min-height:480px;
 					">
+						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin-bottom:2.5rem;">Bhagavad Gita &middot; Verse Generator</p>
 
-						<p style="
-							font-size: 0.65rem;
-							letter-spacing: 0.25em;
-							text-transform: uppercase;
-							color: #f5c842;
-							margin-bottom: 2.5rem;
-						">Bhagavad Gita · Telugu Verses</p>
-
-						<div style="
-							max-width: 640px;
-							width: 100%;
-							border: 1px solid #222;
-							padding: 3rem 2.5rem;
-							text-align: center;
-							background: #111;
-							border-radius: 2px;
-						">
-							<p id="gita-verse-number" style="
-								font-size: 0.7rem;
-								color: #555;
-								letter-spacing: 0.12em;
-								margin-bottom: 1.5rem;
-								text-transform: uppercase;
-							">—</p>
-
-							<p id="gita-verse-text" style="
-								font-size: 1.3rem;
-								line-height: 2;
-								color: #ddd;
-								min-height: 80px;
-								font-style: italic;
-							">Loading verse...</p>
-
-							<p id="gita-error" style="color: #ff6b6b; font-size: 0.8rem; margin-top: 0.5rem;"></p>
+						<div style="max-width:640px;width:100%;border:1px solid #222;padding:3rem 2.5rem;text-align:center;background:#111;border-radius:2px;">
+							<p id="gita-chapter-label" style="font-size:0.65rem;color:#555;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;"></p>
+							<p id="gita-verse-number" style="font-size:0.7rem;color:#666;letter-spacing:0.12em;margin-bottom:1.5rem;text-transform:uppercase;">&mdash;</p>
+							<p id="gita-verse-text" style="font-size:1.1rem;line-height:2;color:#ddd;min-height:80px;font-style:italic;">Loading verse...</p>
+							<p id="gita-translation" style="font-size:0.85rem;line-height:1.7;color:#888;margin-top:1rem;font-style:normal;"></p>
+							<p id="gita-error" style="color:#ff6b6b;font-size:0.8rem;margin-top:0.5rem;"></p>
 						</div>
 
-						<div style="
-							display: flex;
-							gap: 1rem;
-							margin-top: 2rem;
-							flex-wrap: wrap;
-							justify-content: center;
-						">
-							<button onclick="gitaFetchRandom()" style="
-								background: transparent;
-								border: 1px solid #333;
-								color: #ccc;
-								padding: 0.55rem 1.4rem;
-								font-size: 0.75rem;
-								letter-spacing: 0.1em;
-								cursor: pointer;
-								border-radius: 2px;
-								transition: border-color 0.2s, color 0.2s;
-							" onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
-							   onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">
-								Random Verse
-							</button>
+						<div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;">
+							<button onclick="gitaFetchRandom()"
+								style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+								onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
+								onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Random Verse</button>
 
-							<button onclick="gitaToggleInput()" style="
-								background: transparent;
-								border: 1px solid #333;
-								color: #ccc;
-								padding: 0.55rem 1.4rem;
-								font-size: 0.75rem;
-								letter-spacing: 0.1em;
-								cursor: pointer;
-								border-radius: 2px;
-								transition: border-color 0.2s, color 0.2s;
-							" onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
-							   onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">
-								Go to Verse
-							</button>
+							<button onclick="gitaToggleInput()"
+								style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+								onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
+								onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Go to Verse</button>
 						</div>
 
-						<div id="gita-chapter-input" style="display:none; gap:0.5rem; margin-top:1.2rem; justify-content:center; flex-wrap:wrap;">
-							<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18" style="
-								background: #0a0a0a;
-								border: 1px solid #333;
-								color: #ccc;
-								padding: 0.45rem 0.7rem;
-								width: 72px;
-								font-size: 0.8rem;
-								border-radius: 2px;
-								text-align: center;
-							">
-							<input type="number" id="gita-vs" placeholder="Vs" min="1" style="
-								background: #0a0a0a;
-								border: 1px solid #333;
-								color: #ccc;
-								padding: 0.45rem 0.7rem;
-								width: 72px;
-								font-size: 0.8rem;
-								border-radius: 2px;
-								text-align: center;
-							">
-							<button onclick="gitaFetchSpecific()" style="
-								background: transparent;
-								border: 1px solid #333;
-								color: #ccc;
-								padding: 0.45rem 1rem;
-								font-size: 0.75rem;
-								letter-spacing: 0.1em;
-								cursor: pointer;
-								border-radius: 2px;
-							">Go</button>
+						<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:1.2rem;justify-content:center;flex-wrap:wrap;">
+							<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
+								style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
+							<input type="number" id="gita-vs" placeholder="Vs" min="1"
+								style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
+							<button onclick="gitaFetchSpecific()"
+								style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;">Go</button>
 						</div>
-
 					</div>
 				</div>
 
@@ -211,68 +100,41 @@
 				<!-- SLIDE 2: Importance of Bhagavad Gita -->
 				<div class="large">
 					<div style="
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						align-items: flex-start;
-						padding: 60px 80px;
-						background: linear-gradient(135deg, #0a0a0a 0%, #141008 100%);
-						height: 100%;
-						min-height: 480px;
+						display:flex;
+						flex-direction:column;
+						justify-content:center;
+						align-items:flex-start;
+						padding:60px 80px;
+						background:linear-gradient(135deg, #0a0a0a 0%, #141008 100%);
+						height:100%;
+						min-height:480px;
 					">
-						<h3 style="
-							font-size: 26px;
-							font-weight: 300;
-							letter-spacing: 0.15em;
-							text-transform: uppercase;
-							color: #fff;
-							margin-bottom: 32px;
-							border-left: 3px solid #f5c842;
-							padding-left: 20px;
-						">Why the Bhagavad Gita Endures</h3>
+						<h3 style="font-size:26px;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:#fff;margin-bottom:32px;border-left:3px solid #f5c842;padding-left:20px;">Why the Bhagavad Gita Endures</h3>
 
-						<ul style="
-							list-style: none;
-							padding: 0;
-							margin: 0;
-							font-size: 15px;
-							line-height: 1.9;
-							color: rgba(255,255,255,0.75);
-							max-width: 700px;
-						">
-							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
-								A <strong style="color:#f5c842">5,000-year-old dialogue</strong> between Arjuna and Krishna — distilled into 700 verses on duty, action, and the self.
+						<ul style="list-style:none;padding:0;margin:0;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.75);max-width:700px;">
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
+								A <strong style="color:#f5c842">5,000-year-old dialogue</strong> between Arjuna and Krishna &mdash; distilled into 700 verses on duty, action, and the self.
 							</li>
-
-							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
-								The concept of <strong style="color:#f5c842">Nishkama Karma</strong> — act without attachment to outcomes — has influenced thinkers from Thoreau to Gandhi.
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
+								The concept of <strong style="color:#f5c842">Nishkama Karma</strong> &mdash; act without attachment to outcomes &mdash; has influenced thinkers from Thoreau to Gandhi.
 							</li>
-
-							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
-								It frames the battlefield as a metaphor for <strong style="color:#f5c842">inner conflict</strong> — the war between duty and desire every person faces.
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
+								The battlefield is a metaphor for <strong style="color:#f5c842">inner conflict</strong> &mdash; the war between duty and desire every person faces.
 							</li>
-
-							<li style="margin-bottom: 18px; padding-left: 24px; position: relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
-								The Telugu tradition carries its own <strong style="color:#f5c842">poetic lineage</strong> — scholars like Tikkana translated it into verse that resonates with South Indian philosophy.
+							<li style="margin-bottom:18px;padding-left:24px;position:relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
+								18 chapters, each a <strong style="color:#f5c842">distinct path</strong> &mdash; Karma Yoga (action), Jnana Yoga (knowledge), Bhakti Yoga (devotion).
 							</li>
-
-							<li style="margin-bottom: 0; padding-left: 24px; position: relative;">
-								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">→</span>
-								This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> — making ancient text accessible and programmable for the modern web.
+							<li style="margin-bottom:0;padding-left:24px;position:relative;">
+								<span style="position:absolute;left:0;top:0;color:#f5c842;font-weight:600;">&rarr;</span>
+								This project surfaces that wisdom <strong style="color:#f5c842">live via API</strong> &mdash; making ancient text accessible and programmable for the modern web.
 							</li>
 						</ul>
 
-						<p style="
-							margin-top: 2.5rem;
-							font-size: 0.7rem;
-							letter-spacing: 0.15em;
-							text-transform: uppercase;
-							color: #444;
-						">Source · Bhagavad Gita Telugu API · gita-api.vercel.app</p>
+						<p style="margin-top:2.5rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#444;">Source &middot; Vedic Scriptures Open API &middot; vedicscriptures.github.io</p>
 					</div>
 				</div>
 
@@ -280,86 +142,87 @@
 			</div>
 
 			<div id="project-info">
-
 				<h2>
 					<span>Bhagavad Gita</span>
-					<span>Telugu Verses</span>
+					<span>Verse Generator</span>
 				</h2>
 
-
 				<div id="project-info-details" class="more">
-
-					<a href="https://gita-api.vercel.app" target="_blank" rel="noopener"><span>gita-api.vercel.app</span></a>
-
-					<p>Live Telugu verses from the Bhagavad Gita, fetched directly from an open API. Navigate by chapter and verse or let chance guide you.</p>
-
+					<a href="https://vedicscriptures.github.io" target="_blank" rel="noopener"><span>vedicscriptures.github.io</span></a>
+					<p>Live verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and verse, or let chance guide you.</p>
 				</div>
-
 
 				<div id="project-info-counter">
 					<span>1</span><span>/2</span>
 					<span class="next"></span>
 				</div>
-
 			</div>
 
 		</section>
-
-
-
 	</main>
 
-	<footer>
-
-	</footer>
+	<footer></footer>
 
 	<script>
-		const GITA_BASE = 'https://gita-api.vercel.app';
+		// Chapter verse counts for generating a valid random verse
+		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
+		const GITA_BASE = 'https://vedicscriptures.github.io';
+
+		function gitaRandInt(min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
 
 		async function gitaFetchRandom() {
 			gitaSetLoading();
-			try {
-				const res = await fetch(GITA_BASE + '/random-verse');
-				if (!res.ok) throw new Error('fetch failed');
-				const data = await res.json();
-				gitaDisplay(data);
-			} catch (e) {
-				gitaShowError('Could not load verse. Please try again.');
-			}
+			const ch = gitaRandInt(1, 18);
+			const vs = gitaRandInt(1, GITA_CHAPTERS[ch - 1]);
+			await gitaLoad(ch, vs);
 		}
 
 		async function gitaFetchSpecific() {
-			const ch = document.getElementById('gita-ch').value;
-			const vs = document.getElementById('gita-vs').value;
+			const ch = parseInt(document.getElementById('gita-ch').value);
+			const vs = parseInt(document.getElementById('gita-vs').value);
 			if (!ch || !vs) { gitaShowError('Enter both chapter and verse.'); return; }
 			gitaSetLoading();
+			await gitaLoad(ch, vs);
+		}
+
+		async function gitaLoad(ch, vs) {
 			try {
-				const res = await fetch(GITA_BASE + '/verse/' + ch + '/' + vs);
+				const res = await fetch(GITA_BASE + '/slok/' + ch + '/' + vs);
 				if (!res.ok) throw new Error('not found');
 				const data = await res.json();
-				gitaDisplay(data);
+				gitaDisplay(data, ch, vs);
 			} catch (e) {
-				gitaShowError('Verse ' + ch + ':' + vs + ' not found.');
+				gitaShowError('Verse ' + ch + ':' + vs + ' not found. Try another.');
 			}
 		}
 
-		function gitaDisplay(data) {
-			document.getElementById('gita-verse-number').textContent = 'Verse ' + data.verse_number;
-			const el = document.getElementById('gita-verse-text');
-			el.textContent = data.text;
-			el.style.color = '#ddd';
+		function gitaDisplay(data, ch, vs) {
+			document.getElementById('gita-chapter-label').textContent = 'Chapter ' + ch;
+			document.getElementById('gita-verse-number').textContent = 'Verse ' + vs;
+			document.getElementById('gita-verse-text').textContent = data.slok || '';
+			document.getElementById('gita-verse-text').style.color = '#ddd';
+			// Show English translation if available (Siva commentary)
+			const translation = data.siva && data.siva.et ? data.siva.et
+				: data.tej && data.tej.et ? data.tej.et
+				: '';
+			document.getElementById('gita-translation').textContent = translation ? '\u201c' + translation + '\u201d' : '';
 			document.getElementById('gita-error').textContent = '';
 		}
 
 		function gitaSetLoading() {
 			document.getElementById('gita-verse-text').textContent = 'Loading...';
 			document.getElementById('gita-verse-text').style.color = '#444';
-			document.getElementById('gita-verse-number').textContent = '—';
+			document.getElementById('gita-verse-number').textContent = '\u2014';
+			document.getElementById('gita-chapter-label').textContent = '';
+			document.getElementById('gita-translation').textContent = '';
 			document.getElementById('gita-error').textContent = '';
 		}
 
 		function gitaShowError(msg) {
 			document.getElementById('gita-verse-text').textContent = '';
+			document.getElementById('gita-translation').textContent = '';
 			document.getElementById('gita-error').textContent = msg;
 		}
 
@@ -372,5 +235,4 @@
 	</script>
 
 </body>
-
 </html>
