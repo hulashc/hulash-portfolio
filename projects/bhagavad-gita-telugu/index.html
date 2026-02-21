@@ -72,21 +72,26 @@
 								<button id="btn-random"
 									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
-									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Random Verse</button>
+									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';"
+									onclick="event.stopPropagation();gitaFetchRandom();">Random Verse</button>
 
 								<button id="btn-goto"
 									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.55rem 1.4rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
-									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';">Go to Verse</button>
+									onmouseout="this.style.borderColor='#333';this.style.color='#ccc';"
+									onclick="event.stopPropagation();gitaToggleInput();">Go to Verse</button>
 							</div>
 
 							<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:1.2rem;justify-content:center;flex-wrap:wrap;">
 								<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
-									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
+									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;"
+									onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
 								<input type="number" id="gita-vs" placeholder="Vs" min="1"
-									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;">
+									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.45rem 0.7rem;width:72px;font-size:0.8rem;border-radius:2px;text-align:center;"
+									onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
 								<button id="btn-go"
-									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;">Go</button>
+									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.45rem 1rem;font-size:0.75rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
+									onclick="event.stopPropagation();gitaFetchSpecific();">Go</button>
 							</div>
 
 						</div>
@@ -173,7 +178,6 @@
 		async function translateToTelugu(sanskritText, cacheKey) {
 			if (teluguCache[cacheKey]) return teluguCache[cacheKey];
 			try {
-				// MyMemory supports Sanskrit (sa) to Telugu (te) translation
 				const url = 'https://api.mymemory.translated.net/get?q=' +
 					encodeURIComponent(sanskritText) + '&langpair=sa|te';
 				const res = await fetch(url);
@@ -201,14 +205,11 @@
 			const tel = document.getElementById('gita-translation');
 			const transIndicator = document.getElementById('gita-translating');
 
-			// Show translating indicator
 			tel.textContent = '';
 			tel.style.display = 'none';
 			transIndicator.style.display = 'block';
-
 			document.getElementById('gita-error').textContent = '';
 
-			// Fetch Telugu translation from MyMemory API
 			if (slokText) {
 				const cacheKey = ch + '_' + vs;
 				const teluguText = await translateToTelugu(slokText, cacheKey);
@@ -217,7 +218,7 @@
 					tel.textContent = '\u201c' + teluguText + '\u201d';
 					tel.style.display = 'block';
 				} else {
-					// Fallback: show English translation if Telugu fails
+					// Fallback to English if Telugu translation fails
 					const enTr = (data.siva && data.siva.et) ? data.siva.et
 						: (data.tej && data.tej.et) ? data.tej.et
 						: (data.purohit && data.purohit.et) ? data.purohit.et
@@ -226,8 +227,6 @@
 					if (enTr) {
 						tel.textContent = '\u201c' + enTr + '\u201d';
 						tel.style.display = 'block';
-					} else {
-						tel.style.display = 'none';
 					}
 				}
 			} else {
@@ -258,17 +257,14 @@
 			box.style.display = box.style.display === 'none' ? 'flex' : 'none';
 		}
 
-		// Block all interaction events bubbling up to the slide listener
-		document.addEventListener('DOMContentLoaded', function () {
+		// Block all pointer/touch events on the container from bubbling to the slide listener
+		(function () {
 			var el = document.getElementById('gita-interactive');
 			if (!el) return;
-			['click','mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(function(evt) {
+			['mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(function(evt) {
 				el.addEventListener(evt, function(e) { e.stopPropagation(); }, true);
 			});
-			document.getElementById('btn-random').addEventListener('click', function(e) { e.stopPropagation(); gitaFetchRandom(); });
-			document.getElementById('btn-goto').addEventListener('click', function(e) { e.stopPropagation(); gitaToggleInput(); });
-			document.getElementById('btn-go').addEventListener('click', function(e) { e.stopPropagation(); gitaFetchSpecific(); });
-		});
+		})();
 
 		gitaFetchRandom();
 	</script>
