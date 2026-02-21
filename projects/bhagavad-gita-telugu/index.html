@@ -11,7 +11,12 @@
 	<meta property="og:url" content="https://www.hulash.com/">
 	<meta property="og:description"
 		content="HULASH is a data engineer designing scalable data systems across cloud, analytics, and automation.">
-
+	<!-- Favicon -->
+	<link rel="icon" type="image/x-icon" href="/content/logo.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/content/logo.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/content/logo.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/content/logo.png">
+	<link rel="manifest" href="/site.webmanifest">
 	<link rel='stylesheet' id='TEMPLATE-css' href='/styles.css' type='text/css' media='all' />
 	<script type="text/javascript" src="/jquery-3.6.0.mind4d0.js" id="jquery-3.6.0.min-js"></script>
 	<script type="text/javascript" src="/jquery.bez.mind4d0.js" id="jquery.bez-js"></script>
@@ -21,8 +26,12 @@
 
 	<script type="text/javascript">
 		projects = [
-			[2270, "20251121", "Jessica Williams", "Blue Abstraction", "#\/projects\/jessica-williams-blue-abstraction\/", "Jessica Williams Blue Abstraction"],
-			[2301, "20251113", "Mark Armijo McKnight", "Posthume", "#\/projects\/mark-mcknight-posthume\/", "Mark McKnight Posthume"]
+			[2270, "20251121", "Jessica Williams", "Blue Abstraction", "#\/projects\/jessica-williams-blue-abstraction\/",
+				"Jessica Williams Blue Abstraction"
+			],
+			[2301, "20251113", "Mark Armijo McKnight", "Posthume", "#\/projects\/mark-mcknight-posthume\/",
+				"Mark McKnight Posthume"
+			]
 		];
 		document.querySelector(':root').style.setProperty('--background', '#000000');
 		document.querySelector(':root').style.setProperty('--mono', '#000000');
@@ -40,6 +49,7 @@
 			box-sizing: border-box;
 			overflow-y: auto;
 		}
+
 		#gita-card {
 			width: 100%;
 			box-sizing: border-box;
@@ -50,6 +60,7 @@
 			border-radius: 2px;
 			overflow: hidden;
 		}
+
 		#gita-chapter-label {
 			font-size: 0.6rem;
 			color: #555;
@@ -57,12 +68,14 @@
 			text-transform: uppercase;
 			margin: 0 0 0.2rem 0;
 		}
+
 		#gita-verse-number {
 			font-size: 0.65rem;
 			color: #555;
 			letter-spacing: 0.12em;
 			margin: 0 0 1.2rem 0;
 		}
+
 		#gita-verse-text {
 			font-size: 1rem;
 			line-height: 1.9;
@@ -73,6 +86,7 @@
 			overflow-wrap: break-word;
 			white-space: pre-wrap;
 		}
+
 		.gita-divider {
 			margin: 1rem 0 0 0;
 			padding-top: 1rem;
@@ -82,12 +96,14 @@
 			white-space: normal;
 			display: none;
 		}
+
 		#gita-translation {
 			font-size: 0.88rem;
 			line-height: 1.8;
 			color: #b0c4de;
 			font-family: 'Noto Sans Telugu', sans-serif;
 		}
+
 		#gita-translation::before {
 			content: 'తెలుగు అనువాదం';
 			display: block;
@@ -98,6 +114,7 @@
 			margin-bottom: 0.5rem;
 			font-family: sans-serif;
 		}
+
 		#gita-english {
 			font-size: 0.85rem;
 			line-height: 1.8;
@@ -107,6 +124,7 @@
 			overflow-wrap: break-word;
 			white-space: normal;
 		}
+
 		#gita-english::before {
 			content: 'English Translation';
 			display: block;
@@ -117,6 +135,7 @@
 			margin-bottom: 0.5rem;
 			font-style: normal;
 		}
+
 		#gita-translating {
 			font-size: 0.7rem;
 			color: #555;
@@ -124,6 +143,7 @@
 			font-style: italic;
 			display: none;
 		}
+
 		#gita-error {
 			color: #ff6b6b;
 			font-size: 0.8rem;
@@ -142,6 +162,7 @@
 			box-sizing: border-box;
 			overflow-y: auto;
 		}
+
 		.nlp-card {
 			max-width: 700px;
 			width: 100%;
@@ -151,6 +172,7 @@
 			box-sizing: border-box;
 			overflow: hidden;
 		}
+
 		.nlp-card-title {
 			font-size: 0.72rem;
 			font-weight: 400;
@@ -161,11 +183,13 @@
 			text-align: center;
 			line-height: 1.6;
 		}
+
 		.nlp-rows {
 			display: flex;
 			flex-direction: column;
 			gap: 0;
 		}
+
 		.nlp-row {
 			display: flex;
 			align-items: flex-start;
@@ -173,9 +197,11 @@
 			padding: 0.7rem 0;
 			border-bottom: 1px solid #1a1a1a;
 		}
+
 		.nlp-row:last-child {
 			border-bottom: none;
 		}
+
 		.nlp-arrow {
 			flex-shrink: 0;
 			font-size: 0.6rem;
@@ -183,6 +209,7 @@
 			margin-top: 0.28rem;
 			letter-spacing: 0.05em;
 		}
+
 		.nlp-row-text {
 			font-size: 0.83rem;
 			line-height: 1.7;
@@ -191,19 +218,24 @@
 			word-break: break-word;
 			overflow-wrap: break-word;
 		}
+
 		.nlp-row-text strong {
 			color: rgba(255, 255, 255, 0.9);
 			font-weight: 500;
 		}
+
 		.nlp-row.result .nlp-row-text {
 			color: rgba(255, 255, 255, 0.85);
 		}
+
 		.nlp-row.result .nlp-arrow {
 			color: #f5c842;
 		}
+
 		.nlp-row.result .nlp-highlight {
 			color: #f5c842;
 		}
+
 		.nlp-footer {
 			margin-top: 1.6rem;
 			font-size: 0.6rem;
@@ -240,9 +272,12 @@
 				<div class="large">
 					<div class="gita-slide-inner">
 
-						<p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin:0 0 1.8rem 0;">భగవద్గీత &middot; Verse Generator</p>
+						<p
+							style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5c842;margin:0 0 1.8rem 0;">
+							భగవద్గీత &middot; Verse Generator</p>
 
-						<div id="gita-interactive" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:680px;">
+						<div id="gita-interactive"
+							style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:680px;">
 
 							<div id="gita-card">
 								<p id="gita-chapter-label"></p>
@@ -254,7 +289,8 @@
 								<p id="gita-error"></p>
 							</div>
 
-							<div style="display:flex;gap:0.8rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;">
+							<div
+								style="display:flex;gap:0.8rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;">
 								<button id="btn-random"
 									style="background:transparent;border:1px solid #333;color:#ccc;padding:0.5rem 1.3rem;font-size:0.72rem;letter-spacing:0.1em;cursor:pointer;border-radius:2px;"
 									onmouseover="this.style.borderColor='#f5c842';this.style.color='#f5c842';"
@@ -268,7 +304,8 @@
 									onclick="event.stopPropagation();gitaToggleInput();">Go to Verse</button>
 							</div>
 
-							<div id="gita-chapter-input" style="display:none;gap:0.5rem;margin-top:0.9rem;justify-content:center;flex-wrap:wrap;">
+							<div id="gita-chapter-input"
+								style="display:none;gap:0.5rem;margin-top:0.9rem;justify-content:center;flex-wrap:wrap;">
 								<input type="number" id="gita-ch" placeholder="Ch" min="1" max="18"
 									style="background:#0a0a0a;border:1px solid #333;color:#ccc;padding:0.4rem 0.6rem;width:66px;font-size:0.78rem;border-radius:2px;text-align:center;box-sizing:border-box;"
 									onclick="event.stopPropagation();" onmousedown="event.stopPropagation();">
@@ -296,7 +333,8 @@
 
 								<div class="nlp-row">
 									<span class="nlp-arrow">&#8594;</span>
-									<p class="nlp-row-text">Generic translation APIs treat sacred texts like normal language.</p>
+									<p class="nlp-row-text">Generic translation APIs treat sacred texts like normal
+										language.</p>
 								</div>
 
 								<div class="nlp-row">
@@ -306,22 +344,27 @@
 
 								<div class="nlp-row">
 									<span class="nlp-arrow">&#8594;</span>
-									<p class="nlp-row-text">Implemented a <strong>controlled vocabulary (Sacred Dictionary)</strong> for consistent Sanskrit&ndash;Telugu mapping.</p>
+									<p class="nlp-row-text">Implemented a <strong>controlled vocabulary (Sacred
+											Dictionary)</strong> for consistent Sanskrit&ndash;Telugu mapping.</p>
 								</div>
 
 								<div class="nlp-row">
 									<span class="nlp-arrow">&#8594;</span>
-									<p class="nlp-row-text">Added <strong>validation rules</strong> for subject alignment and key metaphysical terms.</p>
+									<p class="nlp-row-text">Added <strong>validation rules</strong> for subject
+										alignment and key metaphysical terms.</p>
 								</div>
 
 								<div class="nlp-row">
 									<span class="nlp-arrow">&#8594;</span>
-									<p class="nlp-row-text">Built a <strong>refinement pipeline</strong> that enhances API translations before publishing.</p>
+									<p class="nlp-row-text">Built a <strong>refinement pipeline</strong> that enhances
+										API translations before publishing.</p>
 								</div>
 
 								<div class="nlp-row result">
 									<span class="nlp-arrow">&#8594;</span>
-									<p class="nlp-row-text"><strong>Result:</strong> <span class="nlp-highlight">Context-aware, philosophically faithful verse translations.</span></p>
+									<p class="nlp-row-text"><strong>Result:</strong> <span
+											class="nlp-highlight">Context-aware, philosophically faithful verse
+											translations.</span></p>
 								</div>
 
 							</div>
@@ -341,8 +384,10 @@
 					<span>Telugu Verses</span>
 				</h2>
 				<div id="project-info-details" class="more">
-					<a href="https://vedicscriptures.github.io" target="_blank" rel="noopener"><span>vedicscriptures.github.io</span></a>
-					<p>Live verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and verse, or let chance guide you.</p>
+					<a href="https://vedicscriptures.github.io" target="_blank"
+						rel="noopener"><span>vedicscriptures.github.io</span></a>
+					<p>Live verses from the Bhagavad Gita fetched directly from an open API. Navigate by chapter and
+						verse, or let chance guide you.</p>
 				</div>
 				<div id="project-info-counter">
 					<span>1</span><span>/2</span>
@@ -356,7 +401,7 @@
 	<footer></footer>
 
 	<script>
-		const GITA_CHAPTERS = [47,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78];
+		const GITA_CHAPTERS = [47, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 35, 27, 20, 24, 28, 78];
 		const GITA_BASE = 'https://vedicscriptures.github.io';
 		const teluguCache = {};
 
@@ -374,9 +419,18 @@
 		async function gitaFetchSpecific() {
 			const ch = parseInt(document.getElementById('gita-ch').value);
 			const vs = parseInt(document.getElementById('gita-vs').value);
-			if (!ch || !vs) { gitaShowError('Enter both chapter and verse.'); return; }
-			if (ch < 1 || ch > 18) { gitaShowError('Chapter must be 1\u201318.'); return; }
-			if (vs < 1 || vs > GITA_CHAPTERS[ch - 1]) { gitaShowError('Verse ' + vs + ' does not exist in chapter ' + ch + '.'); return; }
+			if (!ch || !vs) {
+				gitaShowError('Enter both chapter and verse.');
+				return;
+			}
+			if (ch < 1 || ch > 18) {
+				gitaShowError('Chapter must be 1\u201318.');
+				return;
+			}
+			if (vs < 1 || vs > GITA_CHAPTERS[ch - 1]) {
+				gitaShowError('Verse ' + vs + ' does not exist in chapter ' + ch + '.');
+				return;
+			}
 			gitaSetLoading();
 			await gitaLoad(ch, vs);
 		}
@@ -429,11 +483,11 @@
 			transIndicator.style.display = 'block';
 			document.getElementById('gita-error').textContent = '';
 
-			const enTr = (data.siva && data.siva.et) ? data.siva.et
-				: (data.purohit && data.purohit.et) ? data.purohit.et
-				: (data.tej && data.tej.et) ? data.tej.et
-				: (data.ram && data.ram.et) ? data.ram.et
-				: '';
+			const enTr = (data.siva && data.siva.et) ? data.siva.et :
+				(data.purohit && data.purohit.et) ? data.purohit.et :
+				(data.tej && data.tej.et) ? data.tej.et :
+				(data.ram && data.ram.et) ? data.ram.et :
+				'';
 
 			if (enTr) {
 				eng.textContent = '\u201c' + enTr + '\u201d';
@@ -481,8 +535,10 @@
 		(function () {
 			var el = document.getElementById('gita-interactive');
 			if (!el) return;
-			['mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(function(evt) {
-				el.addEventListener(evt, function(e) { e.stopPropagation(); }, true);
+			['mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(function (evt) {
+				el.addEventListener(evt, function (e) {
+					e.stopPropagation();
+				}, true);
 			});
 		})();
 
@@ -490,4 +546,5 @@
 	</script>
 
 </body>
+
 </html>
