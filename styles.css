@@ -6,7 +6,7 @@
  Author URI:   http://frederikdelmotte.com
  Version:      1.0.0
 */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&amp;display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,500;0,600&display=swap");
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -116,24 +116,14 @@ input, select {
     opacity: 1; }
   100% {
     opacity: 0; } }
-/* 
- * fonts
-
-@font-face {
-	font-family: 'fontname';
-	src: url('fonts/fontname.otf') format('opentype');
-	font-style: normal;
-	font-stretch: normal;
-}
-
-*/
 /*
  * root
+ * Default palette: warm off-white background, near-black text
  */
 :root {
-  --color: #000;
-  --background: #ccc;
-  --mono: #ccc; }
+  --color: #1a1a1a;
+  --background: #f5f3ee;
+  --mono: #f5f3ee; }
 
 /* 
  * global
@@ -170,6 +160,7 @@ main, section, aside, div {
 
 /* 
  * typography
+ * Inter 300 for subtitles/meta, Inter 500 for body, Inter 600 for active states
  */
 body {
   font-family: 'Inter', sans-serif; }
@@ -177,15 +168,31 @@ body {
 h1, h2, h3, p, a, span, ul li, details summary {
   font-style: normal;
   font-stretch: normal;
-  font-weight: normal;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.01em; }
 
+/* Project subtitle (second span inside nav links) */
+body.projects main section nav a > span span:nth-of-type(2),
+body.category main section nav a > span span:nth-of-type(2) {
+  font-weight: 300 !important;
+  letter-spacing: 0em;
+  opacity: 0.55 !important; }
+
+/* Nav items — lighter weight */
+body header > ul li a {
+  font-weight: 300;
+  letter-spacing: 0.01em; }
+
+/* Active/hovered nav — bump weight */
+body header > ul li a:hover {
+  font-weight: 500; }
+
 strong {
-  font-weight: normal; }
+  font-weight: 600; }
 
 i {
   font-style: normal; }
@@ -196,24 +203,16 @@ i {
 body {
   background: var(--background);
   color: var(--color);
-  transition: color 0.4s cubic-bezier(0.25, 0.25, 0.75, 0.75);
-  /* 
-   * states
-   */ }
+  transition: background 0.4s cubic-bezier(0.25, 0.25, 0.75, 0.75), color 0.4s cubic-bezier(0.25, 0.25, 0.75, 0.75); }
+
 body.projects {
-  /* removed patterned background to prevent visible bars during navigation */
   background-image: none;
 }
 
-/* Force a solid black background to hide pattern during transitions
-   and when you prefer a darker backdrop. Use cautiously as this
-   overrides theme variables. */
 body.force-black {
   background: #000 !important;
 }
 
-/* Convenience: if user wants immediate global black background, add `force-black` to `<body>` in HTML */
-/* (global override removed so theme toggles work correctly) */
   body #grid {
     top: 0;
     left: 0;
@@ -231,6 +230,7 @@ body.force-black {
       width: 100%;
       height: 100%;
       background: rgba(255, 255, 0, 0.2); }
+
   body header {
     position: relative;
     margin: 16px 16px 56px;
@@ -238,20 +238,26 @@ body.force-black {
     justify-content: space-between;
     align-items: center;
     z-index: 2; }
+
+    /* Colour dot — true circle, interactive cues */
     body header > a.color {
       display: block;
-      border-radius: 6px;
+      border-radius: 50%;
       width: 12px;
       height: 12px;
-      will-change: background;
-      transition: background 0.5s cubic-bezier(0.25, 0.25, 0.75, 0.75); }
+      cursor: pointer;
+      will-change: background, transform;
+      transition: background 0.5s cubic-bezier(0.25, 0.25, 0.75, 0.75), transform 0.2s ease; }
+    body header > a.color:hover {
+      transform: scale(1.5); }
+
     body header > ul li {
       display: flex;
       gap: 16px; }
     body header > ul.index {
       position: absolute;
       top: 40px;
-      left: 0px;
+      left: 16px;
       display: none; }
       body header > ul.index li:nth-of-type(2) {
         position: absolute;
@@ -280,8 +286,6 @@ body.force-black {
       body.category main section nav a img,
       body.category main section nav a svg {
         display: none; }
-      body.projects main section nav a > span span:nth-of-type(2), body.category main section nav a > span span:nth-of-type(2) {
-        opacity: .5; }
   body.projects.list header ul.index > li:nth-of-type(1) a:nth-of-type(1), body.category.list header ul.index > li:nth-of-type(1) a:nth-of-type(1) {
     display: block; }
   body.projects.list main section nav a, body.category.list main section nav a {
@@ -293,8 +297,8 @@ body.force-black {
     body.category.list main section nav a svg {
       position: fixed;
       width: calc( ( ( ( 100% - ( ( 6 - 1 ) * 16px ) - ( 2 * 16px ) ) / 6 ) * 4 ) + ( ( 4 - 1 ) * 16px ) );
-      aspect-ratio: 1;
-      object-fit: contain;
+      aspect-ratio: 16/9;
+      object-fit: cover;
       bottom: 64px;
       left: calc( ( ( ( 100vw - ( ( 6 - 1 ) * 16px ) - ( 2 * 16px ) ) / 6 ) * 1 ) + ( ( 1 - 1 ) * 16px ) + 32px );
       z-index: 4; }
@@ -335,7 +339,6 @@ body.force-black {
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100); }
     body.project main section#project #project-slides {
-      /* safari blink fix */
       -webkit-backface-visibility: hidden;
       height: 100%;
       font-size: 0;
@@ -377,8 +380,7 @@ body.force-black {
           transform-origin: top center;
           will-change: transform;
           justify-content: center;
-          align-items: center;
-          /* safari fix */ }
+          align-items: center; }
           body.project main section#project #project-slides > div > div video,
           body.project main section#project #project-slides > div > div img,
           body.project main section#project #project-slides > div > div svg {
@@ -449,14 +451,8 @@ body.force-black {
     body.project main section#project.next #project-info #project-info-details {
       opacity: 0;
       pointer-events: none; }
-  body.info header ul {
-    /*
-    &.nav li:nth-of-type(2){
-    	display: none;
-    }
-    */ }
-    body.info header ul.nav li:nth-of-type(1) {
-      display: none; }
+  body.info header ul.nav li:nth-of-type(1) {
+    display: none; }
   body.info main section {
     padding: 120px calc( ( ( ( 100% - ( ( 6 - 1 ) * 16px ) - ( 2 * 16px ) ) / 6 ) * 1 ) + ( ( 1 - 1 ) * 16px ) + 32px ) 120px 16px;
     display: flex;
@@ -485,23 +481,33 @@ body.force-black {
     body.mono svg {
       fill: var(--color); }
   body.dark {
-    background: #000;
-    color: #fff; }
+    background: #0d0d0f;
+    color: #e8e6e1; }
     body.dark header a.color {
-      background: #fff; }
+      background: #e8e6e1; }
     body.dark.projects.list main section nav a:before, body.dark.category.list main section nav a:before {
-      background: #fff; }
+      background: #e8e6e1; }
     body.dark svg {
-      fill: #fff; }
+      fill: #e8e6e1; }
   body.light {
-    background: #fff;
-    color: #000; }
+    background: #ffffff;
+    color: #1a1a1a; }
     body.light header a.color {
       background: #aaa; }
     body.light.projects.list main section nav a:before, body.light.category.list main section nav a:before {
-      background: #000; }
+      background: #1a1a1a; }
     body.light svg {
-      fill: #000; }
+      fill: #1a1a1a; }
+
+/* 
+ * footer
+ */
+footer {
+  padding: 24px 16px;
+  opacity: 0.4;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.01em; }
 
 /* 
  * media queries
@@ -526,7 +532,7 @@ body.force-black {
   body header {
     margin: 24px; }
     body header > a.color {
-      border-radius: 10px;
+      border-radius: 50%;
       width: 20px;
       height: 20px; }
     body header > ul li {
@@ -553,7 +559,9 @@ body.force-black {
       top: calc( 160px + 36px + 16px );
       bottom: auto;
       right: calc( ( ( ( 100vw - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 1 ) + ( ( 1 - 1 ) * 24px ) + 48px );
-      left: auto; }
+      left: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover; }
     body.projects.list main section nav a:before, body.category.list main section nav a:before {
       content: '';
       width: 0px;
@@ -591,9 +599,10 @@ body.force-black {
       body.projects.grid main section nav a svg, body.category.grid main section nav a video,
       body.category.grid main section nav a img,
       body.category.grid main section nav a svg {
-        aspect-ratio: 1;
+        aspect-ratio: 16/9;
+        width: 100%;
         max-height: 100%;
-        object-fit: contain; }
+        object-fit: cover; }
   body.project main section#project div#project-slides > div.small > div, body.project main section#project div#project-slides > div.medium > div, body.project main section#project div#project-slides > div.large > div {
     height: calc( 100% - 240px ); }
   body.project main section#project div#project-slides > div.small > div {
@@ -618,7 +627,9 @@ body.force-black {
   body.project main section#project.details div#project-slides > div:not(.cover) > div {
     transform: scale(0.75); }
   body.info main section {
-    padding: 160px calc( ( ( ( 100% - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 5 ) + ( ( 5 - 1 ) * 24px ) + 48px ) 160px calc( ( ( ( 100% - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 1 ) + ( ( 1 - 1 ) * 24px ) + 48px ); } }
+    padding: 160px calc( ( ( ( 100% - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 5 ) + ( ( 5 - 1 ) * 24px ) + 48px ) 160px calc( ( ( ( 100% - ( ( 12 - 1 ) * 24px ) - ( 2 * 24px ) ) / 12 ) * 1 ) + ( ( 1 - 1 ) * 24px ) + 48px ); }
+  footer {
+    padding: 24px 48px; } }
 
 /* Make project images clickable without changing size or position */
 #project-slides .project-link {
@@ -629,7 +640,6 @@ body.force-black {
   display: block;
 }
 
-/* Fallback if display:contents has browser issues */
 @supports not (display: contents) {
   #project-slides .project-link {
     display: inline-block;
@@ -658,7 +668,7 @@ body.info .tabs-section p {
 
 body.info .subtitle {
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 300;
   opacity: 0.7;
   display: block;
   margin-top: 8px;
@@ -692,6 +702,7 @@ body.info .tab-btn {
   padding: 12px 24px 12px 20px;
   font-family: inherit;
   font-size: 16px;
+  font-weight: 300;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
@@ -710,7 +721,7 @@ body.info #tab-certs:checked ~ .tab-nav .tab-btn:nth-of-type(4),
 body.info #tab-contact:checked ~ .tab-nav .tab-btn:nth-of-type(5),
 body.info #tab-graph:checked ~ .tab-nav .tab-btn:nth-of-type(6) {
   opacity: 1;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 body.info .tab-input:checked + .tab-nav .tab-btn::after,
@@ -753,7 +764,6 @@ body.info #tab-graph:checked ~ .tab-content #content-graph {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive & Dark mode */
 @media (min-width: 760px) {
   body.info .tabs-section p { font-size: 28px; }
   body.info .tab-btn { font-size: 18px; }
@@ -765,7 +775,6 @@ body.info #tab-graph:checked ~ .tab-content #content-graph {
 
 body.dark .tab-nav { border-bottom-color: rgba(255,255,255,0.1); }
 body.dark .tab-pane ul li { border-bottom: 1px solid rgba(255,255,255,0.05); }
-
 
 body.info .tab-nav {
   justify-content: space-evenly !important;
@@ -788,11 +797,9 @@ body.info .tab-btn {
   pointer-events: all;
 }
 
-/* Prevent the slide from intercepting iframe clicks */
 #project-slides .large:has(iframe) {
   pointer-events: none;
 }
 #project-slides .large:has(iframe) iframe {
   pointer-events: all;
 }
-
