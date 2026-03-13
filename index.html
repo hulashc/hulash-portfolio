@@ -49,83 +49,6 @@
 	<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
 	<link rel='stylesheet' id='TEMPLATE-css' href='styles.css?ver=1.1.0' type='text/css' media='all' />
-
-	<!-- Cross-site nav bar styles (lionfolo style) -->
-	<style>
-		.lionfolo-nav {
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			z-index: 9999;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 0 2rem;
-			height: 56px;
-			background: rgba(10, 10, 10, 0.92);
-			backdrop-filter: blur(10px);
-			-webkit-backdrop-filter: blur(10px);
-			border-bottom: 1px solid rgba(255,255,255,0.07);
-			font-family: inherit;
-			box-sizing: border-box;
-		}
-		.lionfolo-nav__logo {
-			color: #fff;
-			text-decoration: none;
-			font-size: 1rem;
-			font-weight: 600;
-			letter-spacing: 0.02em;
-			white-space: nowrap;
-		}
-		.lionfolo-nav__logo:hover {
-			color: #f5d2b5;
-		}
-		.lionfolo-nav__links {
-			display: flex;
-			gap: 1.75rem;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			align-items: center;
-		}
-		.lionfolo-nav__links li a {
-			color: rgba(255,255,255,0.75);
-			text-decoration: none;
-			font-size: 0.85rem;
-			letter-spacing: 0.04em;
-			transition: color 0.2s ease;
-		}
-		.lionfolo-nav__links li a:hover {
-			color: #fff;
-		}
-		.lionfolo-nav__btn {
-			display: inline-block;
-			padding: 0.4rem 1.1rem;
-			border: 1px solid rgba(255,255,255,0.4);
-			border-radius: 2px;
-			color: #fff !important;
-			text-decoration: none;
-			font-size: 0.8rem;
-			letter-spacing: 0.06em;
-			transition: background 0.2s ease, border-color 0.2s ease;
-			white-space: nowrap;
-		}
-		.lionfolo-nav__btn:hover {
-			background: rgba(255,255,255,0.1);
-			border-color: #fff;
-		}
-		@media (max-width: 600px) {
-			.lionfolo-nav__links {
-				display: none;
-			}
-		}
-		/* Push page content below nav */
-		body.projects.init {
-			padding-top: 56px;
-		}
-	</style>
-
 	<script type="text/javascript" src="jquery-3.6.0.mind4d0.js?ver=6.9" id="jquery-3.6.0.min-js"></script>
 	<script type="text/javascript" src="jquery.bez.mind4d0.js?ver=6.9" id="jquery.bez-js"></script>
 	<script type="text/javascript" src="jquery.easing.1.3d4d0.js?ver=6.9" id="jquery.easing.1.3-js"></script>
@@ -155,20 +78,6 @@
 </head>
 
 <body class="projects init">
-
-	<!-- Lionfolo-style cross-site navigation bar -->
-	<nav class="lionfolo-nav" aria-label="Site navigation">
-		<a href="https://hulashc.github.io/lionfolo/" class="lionfolo-nav__logo">Hulash Chand</a>
-		<ul class="lionfolo-nav__links">
-			<li><a href="https://hulashc.github.io/lionfolo/#about">About</a></li>
-			<li><a href="https://hulashc.github.io/lionfolo/#projects">Projects</a></li>
-			<li><a href="https://hulashc.github.io/lionfolo/#skills">Skills</a></li>
-			<li><a href="https://hulashc.github.io/lionfolo/#work">Experience</a></li>
-			<li><a href="https://hulashc.github.io/lionfolo/#contact">Contact</a></li>
-			<li><a href="/info/">Info</a></li>
-		</ul>
-		<a href="https://hulashc.github.io/lionfolo/" class="lionfolo-nav__btn">Full Site →</a>
-	</nav>
 
 	<canvas id="constellation-canvas" aria-hidden="true"></canvas>
 
